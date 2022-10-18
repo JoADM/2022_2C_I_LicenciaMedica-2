@@ -12,7 +12,7 @@
             string dNI, 
             string password, 
             string eMail, 
-            DateTime fechaAlta,
+            int fechaAlta,
             string matricula, 
             Prestadora prestadora
             )

@@ -14,8 +14,5 @@
         public String Nota { get; set; }  
 
         public Boolean Cargada { get; set; }
-
-
-
     }
 }

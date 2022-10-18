@@ -9,7 +9,7 @@
         public string Password { get; set; }
         public string EMail { get; set; }
         public List<Telefono> Telefonos { get; set; }
-        public DateTime FechaAlta { get; set; }
+        public int FechaAlta { get; set; }
 
         public Usuario(
             string iD, 
@@ -18,7 +18,7 @@
             string dNI, 
             string password, 
             string eMail, 
-            DateTime fechaAlta
+            int fechaAlta
             )
         {
             ID = iD;
