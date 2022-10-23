@@ -9,8 +9,8 @@ namespace _2022_2C_I_LicenciaMedica.Models
         public string Direccion { get; set; }
         public string ObraSocial { get; set; }
         public string Legajo { get; set; }
-        public Boolean EmpleadoActivo { get; set; }
-        public Boolean EmpleadoRRHH { get; set; }
+        public bool EmpleadoActivo { get; set; }
+        public bool EmpleadoRRHH { get; set; }
         public List<Licencia> Licencias { get; set; }
 
         public Empleado(
@@ -24,8 +24,8 @@ namespace _2022_2C_I_LicenciaMedica.Models
             string direccion, 
             string obraSocial, 
             string legajo,
-            Boolean empleadoActivo,
-            Boolean empleadoRRHH
+            bool empleadoActivo,
+            bool empleadoRRHH
             )
             :base(iD, nombre, apellido, dNI, password, eMail, fechaAlta)
         {
