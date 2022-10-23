@@ -1,6 +1,7 @@
 ﻿namespace _2022_2C_I_LicenciaMedica.Models
 {
     public class Licencia { 
+        public int ID { get; set; }
         public DateTime FechaSolicitud { get; set; }
         public String Descripcion { get; set; }
         public Empleado Empleado { get; set; }
