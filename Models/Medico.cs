@@ -4,19 +4,18 @@
         public string Matricula { get; set; }
         public Prestadora Prestadora{ get; set; }
         public List<Licencia> Licencias { get; set; }
-
         public Medico(
-            string iD, 
-            string nombre, 
-            string apellido, 
-            string dNI, 
-            string password, 
-            string eMail, 
+            string iD,
+            string nombre,
+            string apellido,
+            string dNI,
+            string password,
+            string eMail,
             int fechaAlta,
-            string matricula, 
+            string matricula,
             Prestadora prestadora
             )
-        :base(iD, nombre, apellido, dNI, password, eMail, fechaAlta)
+        : base(iD, nombre, apellido, dNI, password, eMail, fechaAlta)
         {
             Matricula = matricula;
             Prestadora = prestadora;
