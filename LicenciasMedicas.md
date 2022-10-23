@@ -1,4 +1,4 @@
-`#` Licencias Medicas 📖
+# Licencias Medicas 📖
 
 ## Objetivos 📋
 Desarrollar un sistema de de Licencias Médicas para una empresa Pyme, que permita la administración y uso de ella. 
@@ -32,7 +32,6 @@ Utilizar Visual Studio 2019 preferentemente y crear una aplicación utilizando A
 - Empleado
 - Medico
 - Licencia
-- Visita
 - Prestadora
 
 `Importante: Todas las entidades deben tener su identificador unico. Id o <ClassNameId>`
@@ -122,18 +121,17 @@ De la misma manera Uds. deben definir los tipos de datos asociados a cada una de
 - Solo puede tener una licencia medica activa. 
 
 **Empleado RRHH**
-- Se distingue solo por un rol, que le da los permisos para gestionar toda la información del sistema, con la excepción de que no puede modificar ni eliminar ningúna Visita. 
+- Se distingue solo por un rol, que le da los permisos para gestionar toda la información del sistema. 
 
 - Podrá listar a todos los empleados.
     - Al acceder al empleado, vera el detalle de sus datos y todas las licencias medicas solicitadas, en orden descendente por Fecha.
-- Podrá Modificar el Medico asignado a una Visita, siempre y cuando, la visita no esté en estado completada.
+- Podrá Modificar el Medico asignado a una licencia, siempre y cuando, la licencia no esté en estado completada.
 
 
 **Medico**
-- Un medico, solo puede ver las visitas asignadas a él. En el detalle, verá no solo la información a cargar de la misma, sino también, los datos del Empleado para ir a su domicilio y datos de contacto.
-- Puede cargar las visitas que tiene asignadas, pero una vez que fué completada, no puede modificarlas.
-- Nunca puede eliminar las visitas.
-- Puede cargar un diagnostico de una visita y cerrarla. Esto habilita al empleado a solicitar otra licencia medica.
+- Un medico, solo puede ver las licencias asignadas a él. En el detalle, verá no solo la información a cargar de la misma, sino también, los datos del Empleado para ir a su domicilio y datos de contacto.
+- Nunca puede eliminar las licencias.
+- Puede cargar un diagnostico de una licencia y cerrarla. Esto habilita al empleado a solicitar otra licencia medica.
 
 **Aplicación General**
 - Información institucional, en base a la información de la Empresa, con su respectiva imagen (Logo)
