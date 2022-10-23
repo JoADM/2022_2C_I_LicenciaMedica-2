@@ -4,7 +4,7 @@
         public DateTime FechaSolicitud { get; set; }
         public String Descripcion { get; set; }
         public Empleado Empleado { get; set; }
-        public Visita[] Visitas { get; set; }
+        public Medico Medico { get; set; }
 
         public DateTime FechaInicioSolicitada { get; set; }
 
