@@ -2,7 +2,7 @@
 {
     public class Usuario{
 
-        public string ID { get; set; }
+        public int UsuarioId { get; set; } 
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string DNI { get; set; }
@@ -12,7 +12,6 @@
         public int FechaAlta { get; set; }
 
         public Usuario(
-            string iD, 
             string nombre, 
             string apellido, 
             string dNI, 
@@ -21,7 +20,6 @@
             int fechaAlta
             )
         {
-            ID = iD;
             Nombre = nombre;
             Apellido = apellido;
             DNI = dNI;
