@@ -11,10 +11,5 @@ namespace LicenciaMedica.Data
         public DbSet<Prestadora> Prestadoras { get; set; }
         public DbSet<Telefono> Telefonos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=LicenciaMedicaDB;Trusted_Connection=True;");
-        }
     }
 }
