@@ -5,6 +5,12 @@ namespace LicenciaMedica.Data
 {
     public class LicenciaMedicaContext : DbContext
     {
+
+        public LicenciaMedicaContext(DbContextOptions options) : base(options)
+        {
+            //haskey, hasone, withmany, onModelCreating
+        }
+
         public DbSet<Medico> Medicos { get; set; }
         public DbSet<Empleado> Empleados { get; set; }
         public DbSet<Licencia> Licencias { get; set; }

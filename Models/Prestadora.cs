@@ -3,6 +3,7 @@
 namespace _2022_2C_I_LicenciaMedica.Models
 {
     public class Prestadora{
+
         public int PrestadoraId { get; set; }
         public string? Nombre { get; set; }
         public Telefono? TelefonoContacto { get; set; }
