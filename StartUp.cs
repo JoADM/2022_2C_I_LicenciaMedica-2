@@ -1,4 +1,7 @@
-﻿namespace LicenciaMedica
+﻿using LicenciaMedica.Data;
+using Microsoft.EntityFrameworkCore;
+
+namespace LicenciaMedica
 {
     public static class Startup
     {
@@ -7,6 +10,11 @@
             //Crear nueva instancia de nuestro servidor web
             var builder = WebApplication.CreateBuilder(args);
             ConfigureServices(builder); //Lo configuramos, con sus respectivos servicios
+
+            //builder.Services.AddDbContext<LicenciaMedicaContext>(options =>
+            //{
+            //options.UseSqlServer(builder.Configuration.GetConnectionString("LicenciaMedicaDBConnection"));
+            //});
 
             var app = builder.Build(); // Sobre esta app configuraremos los middleware
             Configure(app); // Configuramos los middleWare
@@ -18,7 +26,7 @@
             // Add services to the container.
 
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddDbContext<LicenciaMedicaContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("LicenciaMedicaDBConnection")));
         }
 
         private static void Configure(WebApplication app)
