@@ -15,7 +15,7 @@ namespace _2022_2C_I_LicenciaMedica.Models
         public string Legajo { get; set; }
         public bool EmpleadoActivo { get; set; }
         public bool EmpleadoRRHH { get; set; }
-        public List<Licencia> Licencias { get; set; }
+        //public List<Licencia> Licencias { get; set; }
 
 
 
@@ -40,7 +40,9 @@ namespace _2022_2C_I_LicenciaMedica.Models
             Legajo = legajo;
             EmpleadoActivo = empleadoActivo;
             EmpleadoRRHH = empleadoRRHH;
-            Licencias = new List<Licencia>();
+            //Licencias = new List<Licencia>();
         }
+
+        public virtual ICollection<Licencia> Licencia { get; set; }
     }
 }

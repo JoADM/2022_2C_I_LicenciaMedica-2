@@ -22,6 +22,8 @@ namespace LicenciaMedica.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            //Campos a completar en la tabla
+
             modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Licencia", b =>
                 {
                     b.Property<int>("LicenciaId")

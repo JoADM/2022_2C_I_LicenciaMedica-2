@@ -11,6 +11,8 @@ namespace LicenciaMedica.Data
             //haskey, hasone, withmany, onModelCreating
         }
 
+
+        //Tablas existentes
         public DbSet<Medico> Medicos { get; set; }
         public DbSet<Empleado> Empleados { get; set; }
         public DbSet<Licencia> Licencias { get; set; }
