@@ -17,7 +17,6 @@ namespace LicenciaMedica.Data
         public DbSet<Empleado> Empleados { get; set; }
         public DbSet<Licencia> Licencias { get; set; }
         public DbSet<Prestadora> Prestadoras { get; set; }
-        public DbSet<Telefono> Telefonos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
     }
 }

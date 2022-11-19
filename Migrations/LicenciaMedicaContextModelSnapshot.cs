@@ -22,8 +22,6 @@ namespace LicenciaMedica.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            //Campos a completar en la tabla
-
             modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Licencia", b =>
                 {
                     b.Property<int>("LicenciaId")
@@ -86,38 +84,12 @@ namespace LicenciaMedica.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TelefonoContactoID")
+                    b.Property<int?>("TelefonoContacto")
                         .HasColumnType("int");
 
                     b.HasKey("PrestadoraId");
 
-                    b.HasIndex("TelefonoContactoID");
-
                     b.ToTable("Prestadoras");
-                });
-
-            modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Telefono", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<int>("TipoDeTelefono")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UsuarioId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("num")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("Telefonos");
                 });
 
             modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Usuario", b =>
@@ -136,6 +108,10 @@ namespace LicenciaMedica.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -151,9 +127,16 @@ namespace LicenciaMedica.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("NombreUsuario")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Telefono")
+                        .HasColumnType("int");
 
                     b.HasKey("UsuarioId");
 
@@ -166,12 +149,11 @@ namespace LicenciaMedica.Migrations
                 {
                     b.HasBaseType("_2022_2C_I_LicenciaMedica.Models.Usuario");
 
-                    b.Property<string>("Direccion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("EmpleadoActivo")
                         .HasColumnType("bit");
+
+                    b.Property<int>("EmpleadoId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("EmpleadoRRHH")
                         .HasColumnType("bit");
@@ -205,32 +187,16 @@ namespace LicenciaMedica.Migrations
             modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Licencia", b =>
                 {
                     b.HasOne("_2022_2C_I_LicenciaMedica.Models.Empleado", "Empleado")
-                        .WithMany("Licencias")
+                        .WithMany("Licencia")
                         .HasForeignKey("EmpleadoId");
 
                     b.HasOne("_2022_2C_I_LicenciaMedica.Models.Medico", "Medico")
-                        .WithMany("Licencias")
+                        .WithMany("Licencia")
                         .HasForeignKey("MedicoId");
 
                     b.Navigation("Empleado");
 
                     b.Navigation("Medico");
-                });
-
-            modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Prestadora", b =>
-                {
-                    b.HasOne("_2022_2C_I_LicenciaMedica.Models.Telefono", "TelefonoContacto")
-                        .WithMany()
-                        .HasForeignKey("TelefonoContactoID");
-
-                    b.Navigation("TelefonoContacto");
-                });
-
-            modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Telefono", b =>
-                {
-                    b.HasOne("_2022_2C_I_LicenciaMedica.Models.Usuario", null)
-                        .WithMany("Telefonos")
-                        .HasForeignKey("UsuarioId");
                 });
 
             modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Medico", b =>
@@ -244,19 +210,14 @@ namespace LicenciaMedica.Migrations
                     b.Navigation("Prestadora");
                 });
 
-            modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Usuario", b =>
-                {
-                    b.Navigation("Telefonos");
-                });
-
             modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Empleado", b =>
                 {
-                    b.Navigation("Licencias");
+                    b.Navigation("Licencia");
                 });
 
             modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Medico", b =>
                 {
-                    b.Navigation("Licencias");
+                    b.Navigation("Licencia");
                 });
 #pragma warning restore 612, 618
         }

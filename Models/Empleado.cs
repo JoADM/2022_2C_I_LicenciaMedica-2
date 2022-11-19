@@ -18,30 +18,32 @@ namespace _2022_2C_I_LicenciaMedica.Models
         //public List<Licencia> Licencias { get; set; }
 
 
+        public Empleado() { }
 
+        /* public Empleado(
+             string nombre,
+             string apellido,
+             string dNI,
+             string password,
+             string eMail,
+             int fechaAlta,
+             string direccion,
+             string obraSocial,
+             string legajo,
+             bool empleadoActivo,
+             bool empleadoRRHH
+             )
+             : base(nombre, apellido, dNI, password, eMail, fechaAlta)
+         {
+             Direccion = direccion;
+             ObraSocial = obraSocial;
+             Legajo = legajo;
+             EmpleadoActivo = empleadoActivo;
+             EmpleadoRRHH = empleadoRRHH;
+             //Licencias = new List<Licencia>();
+         }
 
-        public Empleado(
-            string nombre,
-            string apellido,
-            string dNI,
-            string password,
-            string eMail,
-            int fechaAlta,
-            string direccion,
-            string obraSocial,
-            string legajo,
-            bool empleadoActivo,
-            bool empleadoRRHH
-            )
-            : base(nombre, apellido, dNI, password, eMail, fechaAlta)
-        {
-            Direccion = direccion;
-            ObraSocial = obraSocial;
-            Legajo = legajo;
-            EmpleadoActivo = empleadoActivo;
-            EmpleadoRRHH = empleadoRRHH;
-            //Licencias = new List<Licencia>();
-        }
+         */
 
         public virtual ICollection<Licencia> Licencia { get; set; }
     }
