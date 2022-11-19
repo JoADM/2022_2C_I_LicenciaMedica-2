@@ -1,6 +1,7 @@
 ﻿using _2022_2C_I_LicenciaMedica.Models;
 using LicenciaMedica.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LicenciaMedica.Controllers
 {
@@ -25,10 +26,15 @@ namespace LicenciaMedica.Controllers
         [ValidateAntiForgeryToken]
 
         //Se saco nombreUsuario, pero hay que agregarlo
-        public async Task<IActionResult> Registrar([Bind("Password,Nombre,Apellido,DNI,Telefono,Direccion,FechaAlta,EMail")] Usuario usuario)
+        public async Task<IActionResult> Registrar([Bind("" +
+            "Nombre,Apellido,Direccion," +
+            "DNI,Password,EMail,Telefono,FechaAlta")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
+                //TODO: Ver como hacer autoincremental el ID
+                usuario.ID =  await _context.Usuarios.CountAsync();
+                usuario.ID++;
                 _context.Add(usuario);// Agrega usuario a la base de datos
                 await _context.SaveChangesAsync(); // Espera
                 return RedirectToAction("Index", "Home");// Te redirige

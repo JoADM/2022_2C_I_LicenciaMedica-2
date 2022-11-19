@@ -1,9 +1,13 @@
-﻿namespace _2022_2C_I_LicenciaMedica.Models
-{
-    public class Usuario{
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-        public int UsuarioId { get; set; }
-        public string NombreUsuario { get; set; }
+namespace _2022_2C_I_LicenciaMedica.Models
+{
+    public class Usuario {
+    
+        public int ID { get; set; }
+
+        [NotMapped]
+        public string? NombreUsuario { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Direccion { get; set; }
