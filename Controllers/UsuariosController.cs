@@ -19,9 +19,7 @@ namespace LicenciaMedica.Controllers
             return View();
         }
 
-        // POST: Usuarios/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
 
@@ -40,6 +38,38 @@ namespace LicenciaMedica.Controllers
                 return RedirectToAction("Index", "Home");// Te redirige
             }
             return View(usuario);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LoggearUsuario(string ususarioRegister, string contraseniaRegister)
+        {
+            //Valida que exista el usuario
+            var u = _context.Usuarios.Where(x => x.Nombre == ususarioRegister && x.Password == contraseniaRegister).FirstOrDefault();
+
+            if (u == null)
+            {
+                TempData["mensaje"] = "El usuario o contraseña ingresados son incorrectos";
+                return RedirectToAction("Login");
+
+            }
+
+            HttpContext.Session.SetString("usuario", u.Nombre);
+
+
+            /*if (u.Admin == "S")
+            {
+                HttpContext.Session.SetString("esAdm", "si");
+            }*/
+
+            //TIENE QUE RETORNAR A LA PAGINA DEL USUARIO QUE SEA      
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> IniciarSesion()
+        {
+            TempData["mensaje"] = TempData["mensaje"];
+            return View();
         }
     }
 }
