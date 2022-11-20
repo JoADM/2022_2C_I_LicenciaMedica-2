@@ -7,8 +7,8 @@ namespace _2022_2C_I_LicenciaMedica.Models
     
         public int ID { get; set; }
 
-        [NotMapped]
-        public string? NombreUsuario { get; set; }
+      
+        public string NombreUsuario { get; set; }
 
         [Required(ErrorMessage = "Ingresa un nombre de usuario")]
         [StringLength(10, MinimumLength = 4, ErrorMessage = "El nombre de usuario debe tener entre 5 y 10 caracteres")]

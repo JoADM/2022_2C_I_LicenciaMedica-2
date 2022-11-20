@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LicenciaMedica.Migrations
 {
     [DbContext(typeof(LicenciaMedicaContext))]
-    [Migration("20221120011928_Moltar")]
-    partial class Moltar
+    [Migration("20221025004224_LicenciaMedicaDB")]
+    partial class LicenciaMedicaDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,15 +86,17 @@ namespace LicenciaMedica.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TelefonoContacto")
+                    b.Property<int?>("TelefonoContactoID")
                         .HasColumnType("int");
 
                     b.HasKey("PrestadoraId");
 
+                    b.HasIndex("TelefonoContactoID");
+
                     b.ToTable("Prestadoras");
                 });
 
-            modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Usuario", b =>
+            modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Telefono", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -102,15 +104,35 @@ namespace LicenciaMedica.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
+                    b.Property<int>("TipoDeTelefono")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("num")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Telefonos");
+                });
+
+            modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Usuario", b =>
+                {
+                    b.Property<int>("UsuarioId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UsuarioId"), 1L, 1);
+
                     b.Property<string>("Apellido")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DNI")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Direccion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -127,17 +149,13 @@ namespace LicenciaMedica.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Telefono")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
+                    b.HasKey("UsuarioId");
 
                     b.ToTable("Usuarios");
 
@@ -148,11 +166,12 @@ namespace LicenciaMedica.Migrations
                 {
                     b.HasBaseType("_2022_2C_I_LicenciaMedica.Models.Usuario");
 
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("EmpleadoActivo")
                         .HasColumnType("bit");
-
-                    b.Property<int>("EmpleadoId")
-                        .HasColumnType("int");
 
                     b.Property<bool>("EmpleadoRRHH")
                         .HasColumnType("bit");
@@ -186,16 +205,32 @@ namespace LicenciaMedica.Migrations
             modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Licencia", b =>
                 {
                     b.HasOne("_2022_2C_I_LicenciaMedica.Models.Empleado", "Empleado")
-                        .WithMany("Licencia")
+                        .WithMany("Licencias")
                         .HasForeignKey("EmpleadoId");
 
                     b.HasOne("_2022_2C_I_LicenciaMedica.Models.Medico", "Medico")
-                        .WithMany("Licencia")
+                        .WithMany("Licencias")
                         .HasForeignKey("MedicoId");
 
                     b.Navigation("Empleado");
 
                     b.Navigation("Medico");
+                });
+
+            modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Prestadora", b =>
+                {
+                    b.HasOne("_2022_2C_I_LicenciaMedica.Models.Telefono", "TelefonoContacto")
+                        .WithMany()
+                        .HasForeignKey("TelefonoContactoID");
+
+                    b.Navigation("TelefonoContacto");
+                });
+
+            modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Telefono", b =>
+                {
+                    b.HasOne("_2022_2C_I_LicenciaMedica.Models.Usuario", null)
+                        .WithMany("Telefonos")
+                        .HasForeignKey("UsuarioId");
                 });
 
             modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Medico", b =>
@@ -209,14 +244,19 @@ namespace LicenciaMedica.Migrations
                     b.Navigation("Prestadora");
                 });
 
+            modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Usuario", b =>
+                {
+                    b.Navigation("Telefonos");
+                });
+
             modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Empleado", b =>
                 {
-                    b.Navigation("Licencia");
+                    b.Navigation("Licencias");
                 });
 
             modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Medico", b =>
                 {
-                    b.Navigation("Licencia");
+                    b.Navigation("Licencias");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LicenciaMedica.Migrations
 {
     [DbContext(typeof(LicenciaMedicaContext))]
-    [Migration("20221119223734_Moro")]
+    [Migration("20221120223418_Moro")]
     partial class Moro
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -96,11 +96,11 @@ namespace LicenciaMedica.Migrations
 
             modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Usuario", b =>
                 {
-                    b.Property<int>("UsuarioId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UsuarioId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<string>("Apellido")
                         .IsRequired()
@@ -127,7 +127,8 @@ namespace LicenciaMedica.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("NombreUsuario")
                         .IsRequired()
@@ -137,10 +138,14 @@ namespace LicenciaMedica.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Rol")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Telefono")
                         .HasColumnType("int");
 
-                    b.HasKey("UsuarioId");
+                    b.HasKey("ID");
 
                     b.ToTable("Usuarios");
 
