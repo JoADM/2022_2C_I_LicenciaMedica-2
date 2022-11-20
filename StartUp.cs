@@ -1,5 +1,7 @@
 ﻿using LicenciaMedica.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace LicenciaMedica
 {
@@ -27,6 +29,18 @@ namespace LicenciaMedica
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<LicenciaMedicaContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("LicenciaMedicaDBConnection")));
+
+            //Para la sesion
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(100);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
         }
 
         private static void Configure(WebApplication app)
@@ -44,6 +58,7 @@ namespace LicenciaMedica
 
             app.UseRouting();
 
+            app.UseSession();
 
             app.UseAuthorization();
 

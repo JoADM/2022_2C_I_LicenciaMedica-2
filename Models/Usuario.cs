@@ -24,6 +24,8 @@ namespace _2022_2C_I_LicenciaMedica.Models
         public string EMail { get; set; }
         public int? Telefono { get; set; }
         public int FechaAlta { get; set; }
+        
+        public string Rol { get; set; }
 
         public Usuario() { }
 

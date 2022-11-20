@@ -2,6 +2,7 @@
 using LicenciaMedica.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.Metrics;
 
 namespace LicenciaMedica.Controllers
 {
@@ -22,14 +23,38 @@ namespace LicenciaMedica.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         //Se saco nombreUsuario, pero hay que agregarlo
         public async Task<IActionResult> Registrar([Bind("" +
             "Nombre,Apellido,Direccion," +
-            "DNI,Password,EMail,Telefono,FechaAlta")] Usuario usuario)
+            "DNI,Password,EMail,Telefono,FechaAlta,Rol")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
+                /*
+                switch (usuario.Rol)
+                {
+                    case "MEDICO":
+                        _context.Add((Medico)usuario);
+                        break;
+
+                    case "RRHH":
+                    case "Empleado":
+                        if(usuario.Rol == "RRHH")
+                        {
+                            ((Empleado)usuario).EmpleadoRRHH = true;
+                        }
+                        else
+                        {
+                            ((Empleado)usuario).EmpleadoRRHH = false;
+                        }
+
+                        //((Empleado)usuario).EmpleadoRRHH = (usuario.Rol == "RRHH");
+                        _context.Add((Empleado)usuario);
+                        break;
+
+                    default:
+                        break;
+                }*/
                 //TODO: Ver como hacer autoincremental el ID
                 usuario.ID =  await _context.Usuarios.CountAsync();
                 usuario.ID++;
@@ -57,10 +82,7 @@ namespace LicenciaMedica.Controllers
             HttpContext.Session.SetString("usuario", u.Nombre);
 
 
-            /*if (u.Admin == "S")
-            {
-                HttpContext.Session.SetString("esAdm", "si");
-            }*/
+            /*HttpContext.Session.SetString("rol", u.Rol);*/
 
             //TIENE QUE RETORNAR A LA PAGINA DEL USUARIO QUE SEA      
             return RedirectToAction("Index", "Home");
