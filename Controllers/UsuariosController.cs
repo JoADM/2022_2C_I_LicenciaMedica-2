@@ -30,53 +30,57 @@ namespace LicenciaMedica.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(usuario.Rol == "medico")
+                if (usuario.Rol == "medico")
                 {
                     Medico nuevoMedico = new Medico();
+                    nuevoMedico.NombreUsuario = usuario.NombreUsuario;
+                    nuevoMedico.Nombre = usuario.Nombre;
                     nuevoMedico.Apellido = usuario.Apellido;
                     nuevoMedico.Direccion = usuario.Direccion;
+                    nuevoMedico.DNI = usuario.DNI;
+                    nuevoMedico.Password = usuario.Password;
+                    nuevoMedico.EMail = usuario.EMail;
+                    nuevoMedico.Telefono = usuario.Telefono;
+                    nuevoMedico.FechaAlta = usuario.FechaAlta;
+                    nuevoMedico.Rol = usuario.Rol;
+                    
+
                     _context.Add(nuevoMedico);// Agrega usuario a la base de datos
+                    
 
                 }
 
                 if (usuario.Rol == "empleado")
                 {
-                    Medico nuevoMedico = new Empleado();
-                    nuevoMedico.Apellido = usuario.Apellido;
-                    nuevoMedico.Direccion = usuario.Direccion;
-                    _context.Add(empleado);// Agrega usuario a la base de datos
+                    Empleado nuevoEmpleado = new Empleado();
+
+
+                    nuevoEmpleado.NombreUsuario = usuario.NombreUsuario;
+                    nuevoEmpleado.Nombre = usuario.Nombre;
+                    nuevoEmpleado.Apellido = usuario.Apellido;
+                    nuevoEmpleado.Direccion = usuario.Direccion;
+                    nuevoEmpleado.DNI = usuario.DNI;
+                    nuevoEmpleado.Password = usuario.Password;
+                    nuevoEmpleado.EMail = usuario.EMail;
+                    nuevoEmpleado.Telefono = usuario.Telefono;
+                    nuevoEmpleado.FechaAlta = usuario.FechaAlta;
+                    nuevoEmpleado.Rol = usuario.Rol;
+
+                    if (usuario.Rol == "rrhh")
+                    {
+                        ((Empleado)usuario).EmpleadoRRHH = true;
+                    }
+                    else
+                    {
+                        ((Empleado)usuario).EmpleadoRRHH = false;
+                    }
+
+                    
+                    _context.Add(nuevoEmpleado);// Agrega usuario a la base de datos
+                    
 
                 }
-                /*
-                switch (usuario.Rol)
-                {
-                    case "MEDICO":
-                        _context.Add((Medico)usuario);
-                        break;
 
-                    case "RRHH":
-                    case "Empleado":
-                        if(usuario.Rol == "RRHH")
-                        {
-                            ((Empleado)usuario).EmpleadoRRHH = true;
-                        }
-                        else
-                        {
-                            ((Empleado)usuario).EmpleadoRRHH = false;
-                        }
-
-                        //((Empleado)usuario).EmpleadoRRHH = (usuario.Rol == "RRHH");
-                        _context.Add((Empleado)usuario);
-                        break;
-
-                    default:
-                        break;
-                }*/
-                //TODO: Ver como hacer autoincremental el ID
-
-
-
-                _context.Add(usuario);// Agrega usuario a la base de datos
                 await _context.SaveChangesAsync(); // Espera
                 return RedirectToAction("Index", "Home");// Te redirige
             }
