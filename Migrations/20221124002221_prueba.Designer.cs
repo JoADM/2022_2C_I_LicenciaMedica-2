@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LicenciaMedica.Migrations
 {
     [DbContext(typeof(LicenciaMedicaContext))]
-    [Migration("20221120223418_Moro")]
-    partial class Moro
+    [Migration("20221124002221_prueba")]
+    partial class prueba
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -96,11 +96,11 @@ namespace LicenciaMedica.Migrations
 
             modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Usuario", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("UsuarioId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UsuarioId"), 1L, 1);
 
                     b.Property<string>("Apellido")
                         .IsRequired()
@@ -111,7 +111,6 @@ namespace LicenciaMedica.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Direccion")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Discriminator")
@@ -145,7 +144,7 @@ namespace LicenciaMedica.Migrations
                     b.Property<int?>("Telefono")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("UsuarioId");
 
                     b.ToTable("Usuarios");
 

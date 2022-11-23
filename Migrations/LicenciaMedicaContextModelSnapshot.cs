@@ -94,11 +94,11 @@ namespace LicenciaMedica.Migrations
 
             modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Usuario", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("UsuarioId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UsuarioId"), 1L, 1);
 
                     b.Property<string>("Apellido")
                         .IsRequired()
@@ -109,7 +109,6 @@ namespace LicenciaMedica.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Direccion")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Discriminator")
@@ -143,7 +142,7 @@ namespace LicenciaMedica.Migrations
                     b.Property<int?>("Telefono")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("UsuarioId");
 
                     b.ToTable("Usuarios");
 
@@ -181,7 +180,7 @@ namespace LicenciaMedica.Migrations
                     b.Property<string>("Matricula")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PrestadoraId")
+                    b.Property<int?>("PrestadoraId")
                         .HasColumnType("int");
 
                     b.HasIndex("PrestadoraId");
@@ -208,9 +207,7 @@ namespace LicenciaMedica.Migrations
                 {
                     b.HasOne("_2022_2C_I_LicenciaMedica.Models.Prestadora", "Prestadora")
                         .WithMany()
-                        .HasForeignKey("PrestadoraId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PrestadoraId");
 
                     b.Navigation("Prestadora");
                 });
