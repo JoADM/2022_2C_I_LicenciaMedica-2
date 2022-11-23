@@ -24,12 +24,29 @@ namespace LicenciaMedica.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
      
-        public async Task<IActionResult> Registrar([Bind("" +
-            "NombreUsuario,Nombre,Apellido,Direccion," +
+        public async Task<IActionResult> Registrar([Bind("NombreUsuario,Nombre,Apellido,Direccion," +
+
             "DNI,Password,EMail,Telefono,FechaAlta,Rol")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
+                if(usuario.Rol == "medico")
+                {
+                    Medico nuevoMedico = new Medico();
+                    nuevoMedico.Apellido = usuario.Apellido;
+                    nuevoMedico.Direccion = usuario.Direccion;
+                    _context.Add(nuevoMedico);// Agrega usuario a la base de datos
+
+                }
+
+                if (usuario.Rol == "empleado")
+                {
+                    Medico nuevoMedico = new Empleado();
+                    nuevoMedico.Apellido = usuario.Apellido;
+                    nuevoMedico.Direccion = usuario.Direccion;
+                    _context.Add(empleado);// Agrega usuario a la base de datos
+
+                }
                 /*
                 switch (usuario.Rol)
                 {
@@ -56,9 +73,8 @@ namespace LicenciaMedica.Controllers
                         break;
                 }*/
                 //TODO: Ver como hacer autoincremental el ID
-                 usuario.ID =  await _context.Usuarios.CountAsync();
-                 usuario.ID++;
-               
+
+
 
                 _context.Add(usuario);// Agrega usuario a la base de datos
                 await _context.SaveChangesAsync(); // Espera
