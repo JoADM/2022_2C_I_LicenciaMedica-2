@@ -30,6 +30,7 @@ namespace LicenciaMedica
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<LicenciaMedicaContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("LicenciaMedicaDBConnection")));
 
+
             //Para la sesion
             builder.Services.AddDistributedMemoryCache();
             builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -59,9 +60,9 @@ namespace LicenciaMedica
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseRouting();
-
             app.UseSession();
+
+            app.UseRouting();
 
             app.UseAuthorization();
 

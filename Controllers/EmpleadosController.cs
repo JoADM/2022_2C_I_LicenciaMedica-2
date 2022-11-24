@@ -2,6 +2,7 @@
 using LicenciaMedica.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
 
 namespace LicenciaMedica.Controllers
 {
@@ -15,14 +16,15 @@ namespace LicenciaMedica.Controllers
         }
 
 
-        public IActionResult Empleados()
+        public IActionResult aniadirLicencia()
         {
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
 
-
-        public async Task<IActionResult> aniadirLicencia([Bind("Descripcion,Empleado,Medico,FechaInicio,FechaFin")] Licencia licencia)
+        public async Task<IActionResult> aniadirLicencia([Bind("Descripcion,FechaInicio,FechaFin")] Licencia licencia)
         {
             if (ModelState.IsValid)
             {
@@ -30,8 +32,8 @@ namespace LicenciaMedica.Controllers
 
                 lic.FechaSolicitud = DateTime.Today;
                 lic.Descripcion = licencia.Descripcion;
-                lic.Empleado = licencia.Empleado;
-                lic.Medico = licencia.Medico;
+                lic.Empleado = new Empleado();
+                lic.Medico = new Medico();
                 lic.FechaInicio = licencia.FechaInicio;
                 lic.FechaFin = licencia.FechaFin;
                 lic.Activa = true;
@@ -41,6 +43,7 @@ namespace LicenciaMedica.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
             }
+
             return View(licencia);
         }
     }
