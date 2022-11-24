@@ -16,5 +16,6 @@
         public DateTime FechaFin { get; set; }
 
         public bool Activa { get; set; }
+
     }
 }

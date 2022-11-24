@@ -41,6 +41,9 @@ namespace LicenciaMedica
                 options.Cookie.IsEssential = true;
             });
 
+
+
+
         }
 
         private static void Configure(WebApplication app)
