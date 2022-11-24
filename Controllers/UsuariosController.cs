@@ -24,9 +24,7 @@ namespace LicenciaMedica.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> Registrar([Bind("NombreUsuario,Nombre,Apellido,Direccion," +
-
-            "DNI,Password,EMail,Telefono,FechaAlta,Rol")] Usuario usuario)
+        public async Task<IActionResult> Registrar([Bind("NombreUsuario,Nombre,Apellido,Direccion,DNI,Password,EMail,Telefono,FechaAlta,Rol")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -82,16 +80,15 @@ namespace LicenciaMedica.Controllers
         public async Task<IActionResult> LoggearUsuario(string ususarioRegister, string contraseniaRegister)
         {
             //Valida que exista el usuario
-            var u = _context.Usuarios.Where(x => x.Nombre == ususarioRegister && x.Password == contraseniaRegister).FirstOrDefault();
+            var u = _context.Usuarios.FirstOrDefault(x => x.NombreUsuario == ususarioRegister && x.Password == contraseniaRegister);
 
             if (u == null)
             {
                 TempData["mensaje"] = "El usuario o contraseña ingresados son incorrectos";
                 return RedirectToAction("Login");
-
             }
 
-            HttpContext.Session.SetString("usuario", u.Nombre);
+            HttpContext.Session.SetString("usuario", u.NombreUsuario);
 
 
             /*HttpContext.Session.SetString("rol", u.Rol);*/

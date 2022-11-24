@@ -43,13 +43,7 @@ namespace LicenciaMedica.Migrations
                     b.Property<DateTime>("FechaFin")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("FechaFinSolicitada")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("FechaInicio")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("FechaInicioSolicitada")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("FechaSolicitud")
@@ -109,6 +103,7 @@ namespace LicenciaMedica.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Direccion")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Discriminator")
@@ -124,12 +119,12 @@ namespace LicenciaMedica.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NombreUsuario")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -140,6 +135,7 @@ namespace LicenciaMedica.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Telefono")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("UsuarioId");

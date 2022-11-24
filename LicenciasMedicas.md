@@ -77,19 +77,11 @@ De la misma manera Uds. deben definir los tipos de datos asociados a cada una de
 - Licencias
 ```
 
-**Telefono**
-```
-- Numero
-- TipoTelefono
-```
-
 **Licencia**
 ```
 - FechaSolicitud
 - Descipcion
 - Empleado
-- FechaInicioSolicitada
-- FechaFinSolicitada
 - FechaInicio
 - FechaFin
 - Activa

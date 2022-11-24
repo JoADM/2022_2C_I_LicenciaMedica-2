@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LicenciaMedica.Migrations
 {
     [DbContext(typeof(LicenciaMedicaContext))]
-    [Migration("20221124002221_prueba")]
-    partial class prueba
+    [Migration("20221124011709_LicenciaMedicaDB")]
+    partial class LicenciaMedicaDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,13 +45,7 @@ namespace LicenciaMedica.Migrations
                     b.Property<DateTime>("FechaFin")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("FechaFinSolicitada")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("FechaInicio")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("FechaInicioSolicitada")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("FechaSolicitud")
@@ -111,6 +105,7 @@ namespace LicenciaMedica.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Direccion")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Discriminator")
@@ -126,12 +121,12 @@ namespace LicenciaMedica.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NombreUsuario")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -142,6 +137,7 @@ namespace LicenciaMedica.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Telefono")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("UsuarioId");
@@ -182,7 +178,7 @@ namespace LicenciaMedica.Migrations
                     b.Property<string>("Matricula")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PrestadoraId")
+                    b.Property<int?>("PrestadoraId")
                         .HasColumnType("int");
 
                     b.HasIndex("PrestadoraId");
@@ -209,9 +205,7 @@ namespace LicenciaMedica.Migrations
                 {
                     b.HasOne("_2022_2C_I_LicenciaMedica.Models.Prestadora", "Prestadora")
                         .WithMany()
-                        .HasForeignKey("PrestadoraId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PrestadoraId");
 
                     b.Navigation("Prestadora");
                 });

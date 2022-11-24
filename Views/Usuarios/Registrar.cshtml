@@ -8,7 +8,6 @@
 
 <html>
 <head>
-    <script src="./funciones.js"></script>
 </head>
 
 <body>
@@ -20,15 +19,13 @@
             <div class="mb-3">
                 <label asp-for="NombreUsuario" class="form-label">Usuario</label>
                 <input asp-for="NombreUsuario" class="form-control" id="usuarioLogin" placeholder="Usuario">
+                <span asp-validation-for="NombreUsuario" class="text-danger"></span> @*error*@
             </div>
             <div class="mb-3">
                 <label asp-for="Password" class="form-label">Contraseña</label>
-                <input asp-for="Password" class="form-control" id="contraseniaLogin" placeholder="Contraseña">
+                <input asp-for="Password" class="form-control" type="password" id="contraseniaLogin" placeholder="Contraseña">
+                <span asp-validation-for="Password" class="text-danger"></span> @*error*@
             </div>
-            @*<div class="mb-3">
-                <label asp-for="Password" class="form-label">Repita contraseña</label>
-                <input asp-for="Password" class="form-control" id="r_contraseniaLogin" placeholder="Repita contraseña">
-            </div>*@
             <div class="mb-3">
                 <label asp-for="Nombre" class="form-label">Nombre</label>
                 <input asp-for="Nombre" class="form-control" id="nombreLogin" placeholder="Nombre">
@@ -37,22 +34,27 @@
             <div class="mb-3">
                 <label asp-for="Apellido" class="form-label">Apellido</label>
                 <input asp-for="Apellido" class="form-control" id="apellidoLogin" placeholder="Apellido">
+                <span asp-validation-for="Apellido" class="text-danger"></span> @*error*@
             </div>
             <div class="mb-3">
                 <label asp-for="DNI" class="form-label">DNI</label>
                 <input asp-for="DNI" class="form-control" id="dniLogin" placeholder="DNI">
+                <span asp-validation-for="DNI" class="text-danger"></span> @*error*@
             </div>
             <div class="mb-3">
                 <label asp-for="Telefono" class="form-label">Telefono</label>
-                <input asp-for="Telefono" class="form-control" id="stelefonoLogin" placeholder="Telefono">
+                <input asp-for="Telefono" type="tel" class="form-control" id="stelefonoLogin" placeholder="Telefono">
+                <span asp-validation-for="Telefono" class="text-danger"></span> @*error*@
             </div>
             <div class="mb-3">
                 <label asp-for="Direccion" class="form-label">Direccion</label>
-                <input asp-for="Direccion" class="form-control" id="direccionLogin" placeholder="Direccion">
+                <input asp-for="Direccion" type="text" class="form-control" id="direccionLogin" placeholder="Direccion">
+                <span asp-validation-for="Direccion" class="text-danger"></span> @*error*@
             </div>
             <div class="mb-3">
                 <label asp-for="FechaAlta" class="form-label">Fecha Alta</label>
                 <input asp-for="FechaAlta" class="form-control" id="fechaAltaLogin" placeholder="Fecha Alta">
+
             </div>
             <div class="mb-3">
                 <label asp-for="EMail" class="form-label">Email</label>
@@ -60,26 +62,19 @@
                 <span asp-validation-for="EMail" class="text-danger"></span> @*error*@
             </div>
 
-
-
-
             <select asp-for="Rol" id="SectorId" name="Rol" class="form-select">
                 <option value="empleado">Empleado</option>
                 <option value="rrhh">RRHH</option>
-                <option  value="medico">Medico</option>
+                <option value="medico">Medico</option>
             </select>
-
-
-
 
             <div class="modal-footer">
                 <button type="submit" title="Crear usuario" class="btn btn-dark form-control">Registrate</button>
             </div>
         </div>
-
     </form>
 
-   
+
 
 
 

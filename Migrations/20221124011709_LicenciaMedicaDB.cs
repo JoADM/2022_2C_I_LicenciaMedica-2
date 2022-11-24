@@ -31,14 +31,14 @@ namespace LicenciaMedica.Migrations
                 {
                     UsuarioId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NombreUsuario = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Nombre = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    NombreUsuario = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DNI = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EMail = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<int>(type: "int", nullable: true),
+                    Telefono = table.Column<int>(type: "int", nullable: false),
                     FechaAlta = table.Column<int>(type: "int", nullable: false),
                     Rol = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -57,8 +57,7 @@ namespace LicenciaMedica.Migrations
                         name: "FK_Usuarios_Prestadoras_PrestadoraId",
                         column: x => x.PrestadoraId,
                         principalTable: "Prestadoras",
-                        principalColumn: "PrestadoraId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "PrestadoraId");
                 });
 
             migrationBuilder.CreateTable(
@@ -71,8 +70,6 @@ namespace LicenciaMedica.Migrations
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EmpleadoId = table.Column<int>(type: "int", nullable: true),
                     MedicoId = table.Column<int>(type: "int", nullable: true),
-                    FechaInicioSolicitada = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FechaFinSolicitada = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FechaInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FechaFin = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Activa = table.Column<bool>(type: "bit", nullable: false)
