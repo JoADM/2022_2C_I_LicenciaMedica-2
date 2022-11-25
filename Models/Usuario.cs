@@ -35,9 +35,6 @@ namespace _2022_2C_I_LicenciaMedica.Models
 
         [Required(ErrorMessage = "Ingresa un telefono")]
         public int? Telefono { get; set; }
-
-        public int FechaAlta { get; set; }
-
         public string Rol { get; set; }
     }
 }

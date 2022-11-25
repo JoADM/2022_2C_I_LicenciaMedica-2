@@ -24,7 +24,7 @@ namespace LicenciaMedica.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> Registrar([Bind("NombreUsuario,Nombre,Apellido,Direccion,DNI,Password,EMail,Telefono,FechaAlta,Rol")] Usuario usuario)
+        public async Task<IActionResult> Registrar([Bind("NombreUsuario,Nombre,Apellido,Direccion,DNI,Password,EMail,Telefono,Rol")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -39,7 +39,6 @@ namespace LicenciaMedica.Controllers
                     nuevoMedico.Password = usuario.Password;
                     nuevoMedico.EMail = usuario.EMail;
                     nuevoMedico.Telefono = usuario.Telefono;
-                    nuevoMedico.FechaAlta = usuario.FechaAlta;
                     nuevoMedico.Rol = usuario.Rol;
 
                     _context.Usuarios.Add(nuevoMedico);
@@ -57,7 +56,6 @@ namespace LicenciaMedica.Controllers
                     nuevoEmpleado.Password = usuario.Password;
                     nuevoEmpleado.EMail = usuario.EMail;
                     nuevoEmpleado.Telefono = usuario.Telefono;
-                    nuevoEmpleado.FechaAlta = usuario.FechaAlta;
                     nuevoEmpleado.Rol = usuario.Rol;
                     nuevoEmpleado.EmpleadoActivo = true;
 
