@@ -31,6 +31,7 @@ namespace LicenciaMedica.Controllers
                 if (usuario.Rol == "medico")
                 {
                     Medico nuevoMedico = new Medico();
+
                     nuevoMedico.NombreUsuario = usuario.NombreUsuario;
                     nuevoMedico.Nombre = usuario.Nombre;
                     nuevoMedico.Apellido = usuario.Apellido;

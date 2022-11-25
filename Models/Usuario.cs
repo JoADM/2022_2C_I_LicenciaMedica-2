@@ -38,6 +38,7 @@ namespace _2022_2C_I_LicenciaMedica.Models
 
         public int FechaAlta { get; set; }
 
+        [Required(ErrorMessage = "Seleccione un rol")]
         public string Rol { get; set; }
     }
 }

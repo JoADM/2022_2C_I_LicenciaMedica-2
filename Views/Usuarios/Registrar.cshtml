@@ -4,6 +4,7 @@
 
 <html>
 <head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 </head>
 
 <body>
@@ -54,15 +55,58 @@
                 <input asp-for="EMail" class="form-control" id="mailLogin" placeholder="Email">
                 <span asp-validation-for="EMail" class="text-danger"></span> @*error*@
             </div>
+            <div>
+                <label asp-for="Rol" class="form-label">Rol</label>
+                <select asp-for="Rol" id="rolSelector" name="Rol" class="form-select">
+                    <option disabled selected>-Seleccione un rol-</option>
+                    <option value="empleado">Empleado</option>
+                    <option value="rrhh">RRHH</option>
+                    <option value="medico">Medico</option>
+                </select>
+                <span asp-validation-for="Rol" class="text-danger"></span> @*error*@
+            </div>
+            &nbsp;
+            <div class="mb-3" id="medico">
+                <label class="form-label">Matricula</label>
+                <input class="form-control" id="mailLogin" placeholder="Matricula">
+            </div>
+            <div id="empleado">
+                <div class="mb-3">
+                    <label class="form-label">Obra social</label>
+                    <input class="form-control" id="mailLogin" placeholder="Matricula">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Legajo</label>
+                    <input class="form-control" id="mailLogin" placeholder="Matricula">
+                </div>
+            </div>
 
-            <select asp-for="Rol" id="SectorId" name="Rol" class="form-select">
-                <option value="empleado">Empleado</option>
-                <option value="rrhh">RRHH</option>
-                <option value="medico">Medico</option>
-            </select>
 
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $("#medico").hide();
+                    $("#empleado").hide();
+                    $("#rolSelector").change(function () {
+
+                        var type = $(this).val();
+
+                        if (type == "medico") {
+                            $("#medico").show();
+                        } else {
+                            $("#medico").hide();
+                        }
+
+                        if (type == "empleado" || type == "rrhh") {
+                            $("#empleado").show();
+                        } else {
+                            $("#empleado").hide();
+                        }
+                    });
+                });
+            </script>
             <div class="modal-footer">
-                <button type="submit" title="Crear usuario" class="btn btn-dark form-control">Registrate</button>
+                <button id="registro" type="submit" title="Crear usuario" class="btn btn-dark form-control">Registrate</button>
             </div>
         </div>
     </form>
