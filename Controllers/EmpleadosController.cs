@@ -44,8 +44,8 @@ namespace LicenciaMedica.Controllers
                 lic.Activa = true;
 
                 //Prueba para la BBDD
-                lic.EmpleadoId = 1;
-                lic.MedicoId = 1;
+                //lic.EmpleadoId = 1;
+                //lic.MedicoId = 1;
 
                 _context.Licencias.Add(lic);
 
