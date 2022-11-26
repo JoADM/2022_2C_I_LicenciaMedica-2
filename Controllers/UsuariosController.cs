@@ -101,5 +101,16 @@ namespace LicenciaMedica.Controllers
             TempData["mensaje"] = TempData["mensaje"];
             return View();
         }
+
+        public async Task<IActionResult> Logout()
+        {
+
+            HttpContext.Session.Remove("usuario");
+            HttpContext.Session.Remove("nombreUsuario");
+            HttpContext.Session.Remove("password");
+            HttpContext.Session.Remove("usuarioID");
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
