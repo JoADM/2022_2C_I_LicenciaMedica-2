@@ -161,26 +161,36 @@ namespace LicenciaMedica.Controllers
             {
                 _context.Licencias.Remove(licencia);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool LicenciaExists(int id)
         {
-          return _context.Licencias.Any(e => e.LicenciaId == id);
+            return _context.Licencias.Any(e => e.LicenciaId == id);
         }
 
         public IActionResult MisLicencias()
         {
-            var id = HttpContext.Session.GetString("EmpleadoId");
-            var uId = int.Parse(id);
-            var z = (
-                from p in _context.Licencias
-                .Include(p => p.Empleado)
-                .Where(x => x.EmpleadoId == uId)
-                orderby p.FechaSolicitud descending
-                select p).ToList();
+            List<Licencia> z = new List<Licencia>();
+            try
+            {
+                var id = HttpContext.Session.GetString("EmpleadoId");
+                var uId = int.Parse(id);
+                z = (
+                    from p in _context.Licencias
+                    .Include(p => p.Empleado)
+                    .Where(x => x.EmpleadoId == uId)
+                    orderby p.FechaSolicitud descending
+                    select p).ToList();
+
+            }
+            catch
+            {
+
+            }
+
             return View(z);
         }
 
