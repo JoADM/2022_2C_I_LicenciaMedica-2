@@ -36,25 +36,22 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Medicos" asp-action="Medicos">Medicos</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Empleados" asp-action="aniadirLicencia">Empleados</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="RRHH" asp-action="RRHH">RRHH</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Registrar">Usuarios</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="MisLicencias">Licencias</a>
-                                </li>
+                                
+                               
+                               
+                               
                             }
                         }
-                            
-                           @{ if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("empleado")))
+
+                        @{
+                            if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("usuario")) && (@HttpContextAccessor.HttpContext.Session.GetString("rol")) == "empleado")
                             {
+
                                 <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="MisLicencias">Mis Licencias</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Empleados" asp-action="aniadirLicencia">Añadir Licencia</a>
                                 </li>
                             }
                         }
