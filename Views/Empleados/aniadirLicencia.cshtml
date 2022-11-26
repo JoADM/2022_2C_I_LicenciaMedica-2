@@ -38,14 +38,15 @@
 
                         <label asp-for="Medico" class="form-label">Medico</label>
                         <select asp-for="Medico" id="SectorId" name="medico" class="form-select">
+                            <option>Seleccione su médico</option>
                             @{
                                 try
                                 {
-                                            @foreach (var user in ViewBag.usuarios)
+                                    @foreach (var user in ViewBag.usuarios)
                                     {
                                         if (user.Rol == "medico")
                                         {
-                                                    <option value="@user">@user.Nombre<p> - </p> @user.Matricula</option>
+                                            <option value="@user">@user.Nombre<p>  </p> @user.Apellido</option>
                                         }
                                     }
                                 }
@@ -55,9 +56,8 @@
 
                             }
                         </select>
-
                         <div class="modal-footer">
-                            <button type="submit" title="aa" class="btn btn-dark form-control">Añadir</button>
+                            <input type="submit" value="Añadir" class="btn btn-dark form-control"/>
                         </div>
                     </form>
                 </div>

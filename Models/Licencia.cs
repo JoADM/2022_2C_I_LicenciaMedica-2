@@ -5,9 +5,7 @@
         public int LicenciaId { get; set; }
         public DateTime FechaSolicitud { get; set; }
         public string Descripcion { get; set; }
-
         public int? EmpleadoId { get; set; }
-
         public int? MedicoId { get; set; }
         public Empleado Empleado { get; set; }
         public Medico Medico { get; set; }
