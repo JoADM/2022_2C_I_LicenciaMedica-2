@@ -173,12 +173,12 @@ namespace LicenciaMedica.Controllers
 
         public IActionResult MisLicencias()
         {
-            var id = HttpContext.Session.GetString("idUsuario");
+            var id = HttpContext.Session.GetString("EmpleadoId");
             var uId = int.Parse(id);
             var z = (
                 from p in _context.Licencias
-                .Include(p => p.LicenciaId)
-                .Where(x => x.LicenciaId == uId)
+                .Include(p => p.Empleado)
+                .Where(x => x.EmpleadoId == uId)
                 orderby p.FechaSolicitud descending
                 select p).ToList();
             return View(z);

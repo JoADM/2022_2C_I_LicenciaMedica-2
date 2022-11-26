@@ -45,7 +45,18 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Registrar">Usuarios</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="MisLicencias">Licencias</a>
+                                </li>
                             }
+                            
+                            if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("rol == empleado")))
+                            {
+                                <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="MisLicencias">Mis Licencias</a>
+                                </li>
+                            } }
+
                         }
                     </ul>
                 </div>
