@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LicenciaMedica.Migrations
 {
     [DbContext(typeof(LicenciaMedicaContext))]
-    [Migration("20221125033705_LicenciaMedicaDB")]
-    partial class LicenciaMedicaDB
+    [Migration("20221126005320_Moro")]
+    partial class Moro
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -115,6 +115,9 @@ namespace LicenciaMedica.Migrations
                     b.Property<string>("EMail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FechaAlta")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .IsRequired()

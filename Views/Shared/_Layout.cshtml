@@ -24,7 +24,7 @@
                     <ul class="navbar-nav flex-grow-1">
                         @{
 
-                            if (String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("rol")))
+                            if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("rol")))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -49,24 +49,42 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="MisLicencias">Licencias</a>
                                 </li>
                             }
+                        }
                             
-                            if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("rol == empleado")))
+                           @{ if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("rol == empleado")))
                             {
                                 <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="MisLicencias">Mis Licencias</a>
                                 </li>
-                            } }
-
+                            }
                         }
+
+                        
                     </ul>
                 </div>
 
-                <span class="navbar-text mx-2">
-                    <a class="btn btn-light form-control" id="enviar" asp-area="" asp-controller="Usuarios" asp-action="IniciarSesion"> Iniciar Sesión </a>
-                </span>
-                <span class="navbar-text mx-2">
-                    <a class="btn btn-light form-control" id="enviar" asp-area="" asp-controller="Usuarios" asp-action="Registrar"> Registrarse </a>
-                </span>
+                @{
+                    if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("rol")))
+                    {
+                        <span class="navbar-text mx-2">
+                            Hola, @HttpContextAccessor.HttpContext.Session.GetString("rol")
+                        </span>
+                        <span class="navbar-text mx-2">
+                            <a class="btn btn-dark text-light form-control" id="enviar" asp-area="" asp-controller="Usuarios" asp-action="Logout"> Cerrar Sesión </a>
+                        </span>
+                    }
+
+                    else
+                    {
+                        <span class="navbar-text mx-2">
+                            <a class="btn btn-light form-control" id="enviar" asp-area="" asp-controller="Usuarios" asp-action="IniciarSesion"> Iniciar Sesión </a>
+                        </span>
+                        <span class="navbar-text mx-2">
+                            <a class="btn btn-light form-control" id="enviar" asp-area="" asp-controller="Usuarios" asp-action="Registrar"> Registrarse </a>
+                        </span>
+                    }
+                }
+
 
             </div>
         </nav>
