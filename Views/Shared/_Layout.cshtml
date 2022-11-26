@@ -51,7 +51,7 @@
                             }
                         }
                             
-                           @{ if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("rol == empleado")))
+                           @{ if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("empleado")))
                             {
                                 <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="MisLicencias">Mis Licencias</a>
@@ -64,10 +64,10 @@
                 </div>
 
                 @{
-                    if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("rol")))
+                    if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("usuario")))
                     {
                         <span class="navbar-text mx-2">
-                            Hola, @HttpContextAccessor.HttpContext.Session.GetString("rol")
+                            Hola, @HttpContextAccessor.HttpContext.Session.GetString("usuario")
                         </span>
                         <span class="navbar-text mx-2">
                             <a class="btn btn-dark text-light form-control" id="enviar" asp-area="" asp-controller="Usuarios" asp-action="Logout"> Cerrar Sesión </a>
