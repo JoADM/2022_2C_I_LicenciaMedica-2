@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LicenciaMedica.Migrations
 {
     [DbContext(typeof(LicenciaMedicaContext))]
-    [Migration("20221126145949_LicenciaMedicaDB")]
-    partial class LicenciaMedicaDB
+    [Migration("20221127213216_Moro")]
+    partial class Moro
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
