@@ -4,65 +4,136 @@
     ViewData["Title"] = "Mis Licencias";
 }
 
+<html>
 
+<body>
 
+    <div class="caja-transparente">
 
-<div class="caja-transparente">
+        <h1 class="mt-3 mb-3">
+            Mis Licencias
+        </h1>
 
-    <h1 class="mt-3 mb-3">
-        Mis Licencias
-    </h1>
+        @for (int i = 0; i < 5; i++)
+        {
+            int cant = i + 1;
+            <div class="card" style="width: 18rem; margin: .25rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Licencia N°: @cant</h5>
+                    <b class="card-text">Nombre medico: </b><br>
+                    <b class="card-text">@Html.DisplayNameFor(model => model.Descripcion): </b><br>
+                    <b class="card-text">@Html.DisplayNameFor(model => model.FechaInicio): </b><br>
+                    <b class="card-text">@Html.DisplayNameFor(model => model.FechaFin): </b><br>
+                    <b class="card-text">@Html.DisplayNameFor(model => model.Activa): </b><br>
+                </div>
+            </div>
+        }
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Empleado.Nombre)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Descripcion)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Medico.Nombre)
-                </th>
-                
-                <th>
-                    @Html.DisplayNameFor(model => model.FechaInicio)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FechaFin)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Activa)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Empleado.Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Descripcion)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Medico.Nombre)
-                    </td>
-                    
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FechaInicio)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FechaFin)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Activa)
-                    </td>
-
-                </tr>
+        <style>
+            .card {
+                display: inline-block;
             }
-        </tbody>
-    </table>
-</div>
+        </style>
+
+
+
+        @foreach (var item in Model)
+        {
+            /*<div class="card" style="width: 18rem;">
+            <div class="card-body">
+            <h5 class="card-title">Licencia</h5>
+            <b class="card-text">@Html.DisplayNameFor(model => model.Empleado.Nombre):  @Html.DisplayFor(modelItem => item.Empleado.Nombre)</b><br>
+            <b class="card-text">@Html.DisplayNameFor(model => model.Descripcion): @Html.DisplayFor(modelItem => item.Descripcion)</b><br>
+            <b class="card-text">@Html.DisplayNameFor(model => model.Medico.Nombre): @Html.DisplayFor(modelItem => item.Medico.Nombre)</b><br>
+            <b class="card-text">@Html.DisplayNameFor(model => model.FechaInicio): @Html.DisplayFor(modelItem => item.FechaInicio)</b><br>
+            <b class="card-text">@Html.DisplayNameFor(model => model.FechaFin): @Html.DisplayFor(modelItem => item.FechaFin)</b><br>
+            <b class="card-text">@Html.DisplayNameFor(model => model.Activa): @Html.DisplayFor(modelItem => item.Activa)</b><br>
+            <br>
+            <a class="btn btn-dark">Hacer algo</a>
+            </div>
+            </div>*/
+        }
+
+        @{
+            //<div class="card" style="width: 18rem;">
+            //    <div class="card-body">
+            //        <h5 class="card-title">Licencia</h5>
+            //        <b class="card-text">@Html.DisplayNameFor(model => model.Empleado.Nombre):</b></br>
+            //        <b class="card-text">@Html.DisplayNameFor(model => model.Descripcion):</b>
+
+            //</br>
+            //        <b class="card-text">@Html.DisplayNameFor(model => model.Medico.Nombre):</b>
+
+            //</br>
+            //        <b class="card-text">@Html.DisplayNameFor(model => model.FechaInicio):</b>
+
+            //</br>
+            //        <b class="card-text">@Html.DisplayNameFor(model => model.FechaFin):</b>
+
+            //</br>
+            //        <b class="card-text">@Html.DisplayNameFor(model => model.Activa):</b>
+
+            //</br>
+            //        </br>
+            //        <a class="btn btn-dark">Hacer algo</a>
+            //    </div>
+            //</div>
+        }
+
+
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Empleado.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Medico.Nombre)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaInicio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FechaFin)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Activa)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Empleado.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Medico.Nombre)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaInicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FechaFin)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Activa)
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
