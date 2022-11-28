@@ -15,29 +15,33 @@
 <body>
 
     <form id="loginForm" method="post" asp-action="LoggearUsuario">
-        
+
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
- 
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="formGroupExampleInput2" class="form-label">Usuario</label>
-                            <input type="text" class="form-control" id="ususarioRegister" name="ususarioRegister" placeholder="Nombre" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="formGroupExampleInput2" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="contraseniaRegister" name="contraseniaRegister" placeholder="Contraseña" required>
-                        </div>
-                    </div>
 
-                    <div class="modal-footer">
-                        <button type="submit" title="LogIn" class="btn btn-dark form-control ">Iniciar Sesión</button>
-                    </div>
-           
+        <div class="modal-body">
+            <div class="mb-3">
+                <label for="formGroupExampleInput2" class="form-label">Usuario</label>
+                <input type="text" class="form-control" id="ususarioRegister" name="ususarioRegister" placeholder="Nombre" required>
+            </div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput2" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="contraseniaRegister" name="contraseniaRegister" placeholder="Contraseña" required>
+            </div>
+            <h6 color: red>@TempData["mensaje"]</h6>
+        </div>
 
-        
+        <div class="modal-footer">
+            <button type="submit" title="LogIn" class="btn btn-dark form-control ">Iniciar Sesión</button>
+        </div>
 
     </form>
 
+    <style>
+        h6 {
+            color: red !important;
+            margin: auto;
+        }
+    </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"

@@ -2,7 +2,9 @@
 using LicenciaMedica.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol;
 using System.Diagnostics.Metrics;
+using System.Runtime.CompilerServices;
 
 namespace LicenciaMedica.Controllers
 {
@@ -26,6 +28,7 @@ namespace LicenciaMedica.Controllers
 
         public async Task<IActionResult> Registrar([Bind("NombreUsuario,Nombre,Apellido,Direccion,DNI,Password,EMail,Telefono,Rol")] Usuario usuario)
         {
+
             if (ModelState.IsValid)
             {
                 if (usuario.Rol == "medico")
@@ -84,14 +87,14 @@ namespace LicenciaMedica.Controllers
             if (u == null)
             {
                 TempData["mensaje"] = "El usuario o contraseña ingresados son incorrectos";
-                return RedirectToAction("Login");
+                return RedirectToAction("IniciarSesion");
             }
+
+
 
             HttpContext.Session.SetString("usuario", u.NombreUsuario);
             HttpContext.Session.SetString("rol", u.Rol);
             HttpContext.Session.SetString("usuarioId", u.UsuarioId.ToString());
-
-
 
             /*HttpContext.Session.SetString("rol", u.Rol);*/
 
@@ -112,6 +115,7 @@ namespace LicenciaMedica.Controllers
             HttpContext.Session.Remove("nombreUsuario");
             HttpContext.Session.Remove("password");
             HttpContext.Session.Remove("usuarioID");
+
 
             return RedirectToAction("Index", "Home");
         }

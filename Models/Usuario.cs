@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace _2022_2C_I_LicenciaMedica.Models
 {
     public class Usuario
     {
-
         public int UsuarioId { get; set; }
 
 
@@ -40,5 +40,6 @@ namespace _2022_2C_I_LicenciaMedica.Models
 
         [Required(ErrorMessage = "Seleccione un rol")]
         public string Rol { get; set; }
+
     }
 }

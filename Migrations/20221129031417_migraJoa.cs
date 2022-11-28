@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LicenciaMedica.Migrations
 {
-    public partial class joaco : Migration
+    public partial class migraJoa : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,17 +47,11 @@ namespace LicenciaMedica.Migrations
                     Legajo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EmpleadoActivo = table.Column<bool>(type: "bit", nullable: true),
                     EmpleadoRRHH = table.Column<bool>(type: "bit", nullable: true),
-                    PrestadoraId = table.Column<int>(type: "int", nullable: true),
-                    Matricula = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    MedicoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.UsuarioId);
-                    table.ForeignKey(
-                        name: "FK_Usuarios_Prestadoras_PrestadoraId",
-                        column: x => x.PrestadoraId,
-                        principalTable: "Prestadoras",
-                        principalColumn: "PrestadoraId");
                 });
 
             migrationBuilder.CreateTable(
@@ -66,6 +60,7 @@ namespace LicenciaMedica.Migrations
                 {
                     LicenciaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    nombreMedico = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FechaSolicitud = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EmpleadoId = table.Column<int>(type: "int", nullable: true),
@@ -98,11 +93,6 @@ namespace LicenciaMedica.Migrations
                 name: "IX_Licencias_MedicoId",
                 table: "Licencias",
                 column: "MedicoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Usuarios_PrestadoraId",
-                table: "Usuarios",
-                column: "PrestadoraId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -111,10 +101,10 @@ namespace LicenciaMedica.Migrations
                 name: "Licencias");
 
             migrationBuilder.DropTable(
-                name: "Usuarios");
+                name: "Prestadoras");
 
             migrationBuilder.DropTable(
-                name: "Prestadoras");
+                name: "Usuarios");
         }
     }
 }

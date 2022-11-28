@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LicenciaMedica.Data;
 using _2022_2C_I_LicenciaMedica.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security;
 
 namespace LicenciaMedica.Controllers
 {
@@ -65,7 +67,7 @@ namespace LicenciaMedica.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(licencia);
+                _context.Licencias.Add(licencia);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -173,6 +175,7 @@ namespace LicenciaMedica.Controllers
             return _context.Licencias.Any(e => e.LicenciaId == id);
         }
 
+        [HttpGet]
         public IActionResult aniadirLicencia()
         {
             List<Usuario> usuarios = _context.Usuarios.ToList();
@@ -187,50 +190,42 @@ namespace LicenciaMedica.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
-        public async Task<IActionResult> aniadirLicencia([Bind("Descripcion,FechaInicio,FechaFin, EmpleadoId, MedicoId")] Licencia licencia)
+        public async Task<IActionResult> aniadirLicencia([Bind("Descripcion,FechaInicio,FechaFin, EmpleadoId, MedicoId, nombreMedico")] Licencia licencia)
         {
-            //if (ModelState.IsValid)
-            //{
 
+            if (ModelState.IsValid)
+            {
 
-            Licencia lic = new Licencia();
+                Licencia lic = new Licencia();
 
-            lic.FechaSolicitud = DateTime.Today;
-            lic.Descripcion = licencia.Descripcion;
-            lic.EmpleadoId = licencia.EmpleadoId;
+                lic.FechaSolicitud = DateTime.Today;
+                lic.Descripcion = licencia.Descripcion;
+                lic.EmpleadoId = licencia.EmpleadoId;
+                lic.MedicoId = licencia.MedicoId;
+                lic.FechaInicio = licencia.FechaInicio;
+                lic.FechaFin = licencia.FechaFin;
+                lic.nombreMedico = licencia.nombreMedico;
+                lic.Activa = true;
 
+                _context.Licencias.Add(lic);
 
-            lic.Empleado = _context.Empleados.FirstOrDefault(e => e.UsuarioId == licencia.EmpleadoId);
+                ViewBag.nombreMedico = from p in _context.Usuarios.Where(x => x.UsuarioId == licencia.MedicoId) select p;
 
-            lic.Medico = _context.Medicos.FirstOrDefault(e => e.UsuarioId == licencia.MedicoId);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Home");
+            }
 
-
-
-
-
-            //lic.Medico = licencia.Medico;
-            lic.FechaInicio = licencia.FechaInicio;
-            lic.FechaFin = licencia.FechaFin;
-            lic.Activa = true;
-
-            //Prueba para la BBDD
-            //lic.EmpleadoId = 1;
-            //lic.MedicoId = 1;
-
-            _context.Licencias.Add(lic);
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Home");
-            // }
-
+            List<Usuario> usuarios = _context.Usuarios.ToList();
+            ViewBag.usuarios = usuarios;
             return View(licencia);
         }
 
 
+
         public IActionResult MisLicencias()
         {
-            var id = HttpContext.Session.GetInt32("EmpleadoId");
+            var id = int.Parse(HttpContext.Session.GetString("usuarioId"));
+
             var licencias = (
                 from p in _context.Licencias
                 .Include(p => p.Empleado)

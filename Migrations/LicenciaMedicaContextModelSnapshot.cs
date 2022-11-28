@@ -52,6 +52,10 @@ namespace LicenciaMedica.Migrations
                     b.Property<int?>("MedicoId")
                         .HasColumnType("int");
 
+                    b.Property<string>("nombreMedico")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("LicenciaId");
 
                     b.HasIndex("EmpleadoId");
@@ -173,13 +177,8 @@ namespace LicenciaMedica.Migrations
                 {
                     b.HasBaseType("_2022_2C_I_LicenciaMedica.Models.Usuario");
 
-                    b.Property<string>("Matricula")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PrestadoraId")
+                    b.Property<int?>("MedicoId")
                         .HasColumnType("int");
-
-                    b.HasIndex("PrestadoraId");
 
                     b.HasDiscriminator().HasValue("Medico");
                 });
@@ -197,15 +196,6 @@ namespace LicenciaMedica.Migrations
                     b.Navigation("Empleado");
 
                     b.Navigation("Medico");
-                });
-
-            modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Medico", b =>
-                {
-                    b.HasOne("_2022_2C_I_LicenciaMedica.Models.Prestadora", "Prestadora")
-                        .WithMany()
-                        .HasForeignKey("PrestadoraId");
-
-                    b.Navigation("Prestadora");
                 });
 
             modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Empleado", b =>

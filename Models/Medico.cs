@@ -3,18 +3,9 @@ namespace _2022_2C_I_LicenciaMedica.Models
 {
     public class Medico : Usuario
     {
+        public int? MedicoId { get; set; }
 
-
-
-
-        public int? PrestadoraId { get; set; }
-
-        public string? Matricula { get; set; }
-
-        public Prestadora? Prestadora { get; set; }
-
-
-        public virtual ICollection<Licencia> Licencia { get; set; }
+        public virtual ICollection<Licencia>? Licencia { get; set; }
 
     }
 }

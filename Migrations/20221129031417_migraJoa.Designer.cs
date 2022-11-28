@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LicenciaMedica.Migrations
 {
     [DbContext(typeof(LicenciaMedicaContext))]
-    [Migration("20221128153629_joaco")]
-    partial class joaco
+    [Migration("20221129031417_migraJoa")]
+    partial class migraJoa
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,6 +53,10 @@ namespace LicenciaMedica.Migrations
 
                     b.Property<int?>("MedicoId")
                         .HasColumnType("int");
+
+                    b.Property<string>("nombreMedico")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("LicenciaId");
 
@@ -175,13 +179,8 @@ namespace LicenciaMedica.Migrations
                 {
                     b.HasBaseType("_2022_2C_I_LicenciaMedica.Models.Usuario");
 
-                    b.Property<string>("Matricula")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PrestadoraId")
+                    b.Property<int?>("MedicoId")
                         .HasColumnType("int");
-
-                    b.HasIndex("PrestadoraId");
 
                     b.HasDiscriminator().HasValue("Medico");
                 });
@@ -199,15 +198,6 @@ namespace LicenciaMedica.Migrations
                     b.Navigation("Empleado");
 
                     b.Navigation("Medico");
-                });
-
-            modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Medico", b =>
-                {
-                    b.HasOne("_2022_2C_I_LicenciaMedica.Models.Prestadora", "Prestadora")
-                        .WithMany()
-                        .HasForeignKey("PrestadoraId");
-
-                    b.Navigation("Prestadora");
                 });
 
             modelBuilder.Entity("_2022_2C_I_LicenciaMedica.Models.Empleado", b =>
