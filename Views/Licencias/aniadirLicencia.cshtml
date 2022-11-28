@@ -23,7 +23,7 @@
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                 <div class="card-body">
                     <form asp-action="aniadirLicencia">
-                        <input  asp-for="EmpleadoId" id ="EmpleadoId" value="@ViewBag.MiUsuario" />
+                        <input type="hidden" asp-for="EmpleadoId" id="EmpleadoId" value="@ViewBag.MiUsuario" />
                         <div class="mb-3">
                             <label asp-for="Descripcion" class="form-label">Descripcion</label>
                             <input asp-for="Descripcion" class="form-control" id="apellidoLogin" placeholder="Descripcion">
@@ -37,8 +37,8 @@
                             <input asp-for="FechaFin" type="date" id="fechaFin">
                         </div>
 
-                        <label asp-for="Medico" class="form-label">Medico</label>
-                        <select asp-for="Medico" id="MedicoId" name="medico" class="form-select">
+                        <label asp-for="MedicoId" class="form-label">Medico</label>
+                        <select asp-for="MedicoId" id="MedicoId" name="MedicoId" class="form-select">
                             @{
                                 try
                                 {
@@ -46,7 +46,7 @@
                                     {
                                         if (user.Rol == "medico")
                                         {
-                                            <option value="@user">@user.Nombre<p> - </p> @user.Matricula</option>
+                                            <option value="@user.UsuarioId">@user.Nombre <p> - </p> @user.Matricula</option>
                                         }
                                     }
                                 }

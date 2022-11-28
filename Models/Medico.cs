@@ -14,8 +14,6 @@ namespace _2022_2C_I_LicenciaMedica.Models
         public Prestadora? Prestadora { get; set; }
 
 
-        public Medico() { }
-
         public virtual ICollection<Licencia> Licencia { get; set; }
 
     }

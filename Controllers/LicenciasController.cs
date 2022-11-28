@@ -14,7 +14,7 @@ namespace LicenciaMedica.Controllers
     {
         private readonly LicenciaMedicaContext _context;
 
-        
+
         public LicenciasController(LicenciaMedicaContext context)
         {
             _context = context;
@@ -163,14 +163,14 @@ namespace LicenciaMedica.Controllers
             {
                 _context.Licencias.Remove(licencia);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool LicenciaExists(int id)
         {
-          return _context.Licencias.Any(e => e.LicenciaId == id);
+            return _context.Licencias.Any(e => e.LicenciaId == id);
         }
 
         public IActionResult aniadirLicencia()
@@ -178,7 +178,7 @@ namespace LicenciaMedica.Controllers
             List<Usuario> usuarios = _context.Usuarios.ToList();
             ViewBag.usuarios = usuarios;
 
-           
+
             ViewBag.MiUsuario = HttpContext.Session.GetString("usuarioId");
 
 
@@ -188,54 +188,56 @@ namespace LicenciaMedica.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> aniadirLicencia([Bind("Descripcion,FechaInicio,FechaFin, EmpleadoId")] Licencia licencia)
+        public async Task<IActionResult> aniadirLicencia([Bind("Descripcion,FechaInicio,FechaFin, EmpleadoId, MedicoId")] Licencia licencia)
         {
             //if (ModelState.IsValid)
             //{
 
 
-                Licencia lic = new Licencia();
+            Licencia lic = new Licencia();
 
-                lic.FechaSolicitud = DateTime.Today;
-                lic.Descripcion = licencia.Descripcion;
-                lic.EmpleadoId = licencia.EmpleadoId;
+            lic.FechaSolicitud = DateTime.Today;
+            lic.Descripcion = licencia.Descripcion;
+            lic.EmpleadoId = licencia.EmpleadoId;
 
-            
+
             lic.Empleado = _context.Empleados.FirstOrDefault(e => e.UsuarioId == licencia.EmpleadoId);
+
+            lic.Medico = _context.Medicos.FirstOrDefault(e => e.UsuarioId == licencia.MedicoId);
+
 
 
 
 
             //lic.Medico = licencia.Medico;
-                lic.FechaInicio = licencia.FechaInicio;
-                lic.FechaFin = licencia.FechaFin;
-                lic.Activa = true;
+            lic.FechaInicio = licencia.FechaInicio;
+            lic.FechaFin = licencia.FechaFin;
+            lic.Activa = true;
 
-                //Prueba para la BBDD
-                //lic.EmpleadoId = 1;
-                //lic.MedicoId = 1;
+            //Prueba para la BBDD
+            //lic.EmpleadoId = 1;
+            //lic.MedicoId = 1;
 
-                _context.Licencias.Add(lic);
+            _context.Licencias.Add(lic);
 
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
-           // }
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Home");
+            // }
 
             return View(licencia);
         }
-    
 
-    public IActionResult MisLicencias()
+
+        public IActionResult MisLicencias()
         {
-            var id = HttpContext.Session.GetString("EmpleadoId");
-            var uId = int.Parse(id);
-            var z = (
+            var id = HttpContext.Session.GetInt32("EmpleadoId");
+            var licencias = (
                 from p in _context.Licencias
                 .Include(p => p.Empleado)
-                .Where(x => x.EmpleadoId == uId)
+                .Where(x => x.EmpleadoId == id)
                 orderby p.FechaSolicitud descending
                 select p).ToList();
-            return View(z);
+            return View(licencias);
         }
 
     }
