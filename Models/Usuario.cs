@@ -40,5 +40,6 @@ namespace _2022_2C_I_LicenciaMedica.Models
 
         [Required(ErrorMessage = "Seleccione un rol")]
         public string Rol { get; set; }
+
     }
 }

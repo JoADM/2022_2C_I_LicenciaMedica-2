@@ -2,7 +2,9 @@
 using LicenciaMedica.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol;
 using System.Diagnostics.Metrics;
+using System.Runtime.CompilerServices;
 
 namespace LicenciaMedica.Controllers
 {
@@ -24,8 +26,11 @@ namespace LicenciaMedica.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> Registrar([Bind("NombreUsuario,Nombre,Apellido,Direccion,DNI,Password,EMail,Telefono,Rol")] Usuario usuario)
+        public async Task<IActionResult> Registrar([Bind("NombreUsuario,Nombre,Apellido,Direccion,DNI,Password,EMail,Telefono,Rol")] Usuario usuario, string Matricula)
         {
+
+            _ = Matricula;
+
             if (ModelState.IsValid)
             {
                 if (usuario.Rol == "medico")
@@ -41,6 +46,8 @@ namespace LicenciaMedica.Controllers
                     nuevoMedico.EMail = usuario.EMail;
                     nuevoMedico.Telefono = usuario.Telefono;
                     nuevoMedico.Rol = usuario.Rol;
+
+                    nuevoMedico.Matricula = Matricula;
 
                     _context.Usuarios.Add(nuevoMedico);
                 }
@@ -87,11 +94,11 @@ namespace LicenciaMedica.Controllers
                 return RedirectToAction("Login");
             }
 
+
+
             HttpContext.Session.SetString("usuario", u.NombreUsuario);
             HttpContext.Session.SetString("rol", u.Rol);
             HttpContext.Session.SetString("usuarioId", u.UsuarioId.ToString());
-
-
 
             /*HttpContext.Session.SetString("rol", u.Rol);*/
 
@@ -112,6 +119,7 @@ namespace LicenciaMedica.Controllers
             HttpContext.Session.Remove("nombreUsuario");
             HttpContext.Session.Remove("password");
             HttpContext.Session.Remove("usuarioID");
+
 
             return RedirectToAction("Index", "Home");
         }
