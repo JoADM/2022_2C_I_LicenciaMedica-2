@@ -14,9 +14,11 @@ namespace LicenciaMedica.Controllers
     {
         private readonly LicenciaMedicaContext _context;
 
+        
         public LicenciasController(LicenciaMedicaContext context)
         {
             _context = context;
+
         }
 
         // GET: Licencias
@@ -176,24 +178,35 @@ namespace LicenciaMedica.Controllers
             List<Usuario> usuarios = _context.Usuarios.ToList();
             ViewBag.usuarios = usuarios;
 
+           
+            ViewBag.MiUsuario = HttpContext.Session.GetString("usuarioId");
+
+
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> aniadirLicencia([Bind("Descripcion,FechaInicio,FechaFin,Medico")] Licencia licencia)
+        public async Task<IActionResult> aniadirLicencia([Bind("Descripcion,FechaInicio,FechaFin, EmpleadoId")] Licencia licencia)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
 
 
                 Licencia lic = new Licencia();
 
                 lic.FechaSolicitud = DateTime.Today;
                 lic.Descripcion = licencia.Descripcion;
-                lic.Empleado = new Empleado();
-                lic.Medico = licencia.Medico;
+                lic.EmpleadoId = licencia.EmpleadoId;
+
+            
+            lic.Empleado = _context.Empleados.FirstOrDefault(e => e.UsuarioId == licencia.EmpleadoId);
+
+
+
+
+            //lic.Medico = licencia.Medico;
                 lic.FechaInicio = licencia.FechaInicio;
                 lic.FechaFin = licencia.FechaFin;
                 lic.Activa = true;
@@ -206,7 +219,7 @@ namespace LicenciaMedica.Controllers
 
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
-            }
+           // }
 
             return View(licencia);
         }
