@@ -190,15 +190,15 @@ namespace LicenciaMedica.Controllers
 
         public async Task<IActionResult> aniadirLicencia([Bind("Descripcion,FechaInicio,FechaFin, EmpleadoId, MedicoId")] Licencia licencia)
         {
-            //if (ModelState.IsValid)
-            //{
-
-
+           
             Licencia lic = new Licencia();
 
             lic.FechaSolicitud = DateTime.Today;
             lic.Descripcion = licencia.Descripcion;
             lic.EmpleadoId = licencia.EmpleadoId;
+            lic.FechaInicio = licencia.FechaInicio;
+            lic.FechaFin = licencia.FechaFin;
+            lic.Activa = true;
 
 
             lic.Empleado = _context.Empleados.FirstOrDefault(e => e.UsuarioId == licencia.EmpleadoId);
@@ -206,23 +206,11 @@ namespace LicenciaMedica.Controllers
             lic.Medico = _context.Medicos.FirstOrDefault(e => e.UsuarioId == licencia.MedicoId);
 
 
-
-
-
-            //lic.Medico = licencia.Medico;
-            lic.FechaInicio = licencia.FechaInicio;
-            lic.FechaFin = licencia.FechaFin;
-            lic.Activa = true;
-
-            //Prueba para la BBDD
-            //lic.EmpleadoId = 1;
-            //lic.MedicoId = 1;
-
             _context.Licencias.Add(lic);
 
             await _context.SaveChangesAsync();
             return RedirectToAction("Index", "Home");
-            // }
+           
 
             return View(licencia);
         }
@@ -230,7 +218,8 @@ namespace LicenciaMedica.Controllers
 
         public IActionResult MisLicencias()
         {
-            var id = HttpContext.Session.GetInt32("EmpleadoId");
+            var id = int.Parse(HttpContext.Session.GetString("usuarioId"));
+
             var licencias = (
                 from p in _context.Licencias
                 .Include(p => p.Empleado)
