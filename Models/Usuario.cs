@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace _2022_2C_I_LicenciaMedica.Models
 {
@@ -10,7 +8,7 @@ namespace _2022_2C_I_LicenciaMedica.Models
 
 
         [Required(ErrorMessage = "Ingresa un nombre de usuario")]
-        [StringLength(10, MinimumLength = 4, ErrorMessage = "El nombre de usuario debe tener entre 5 y 10 caracteres")]
+        [StringLength(25,MinimumLength = 4, ErrorMessage = "El nombre de usuario debe tener entre 5 y 25 caracteres")]
         public string NombreUsuario { get; set; }
 
         [Required(ErrorMessage = "Ingresa un nombre")]

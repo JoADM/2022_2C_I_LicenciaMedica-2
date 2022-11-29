@@ -29,9 +29,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                                 </li>
+                                <!--
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                                 </li>
+                                -->
                             }
 
                             if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("usuario")) && @HttpContextAccessor.HttpContext.Session.GetString("rol").Equals("medico"))
@@ -48,7 +50,7 @@
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="MisLicencias">Mis Licencias</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="aniadirLicencia">Añadir Licencia</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="aniadirLicencia">Solicitar Licencia</a>
                                 </li>
                             }
                         }
