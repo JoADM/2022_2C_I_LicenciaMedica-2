@@ -90,8 +90,6 @@ namespace LicenciaMedica.Controllers
                 return RedirectToAction("IniciarSesion");
             }
 
-
-
             HttpContext.Session.SetString("usuario", u.NombreUsuario);
             HttpContext.Session.SetString("rol", u.Rol);
             HttpContext.Session.SetString("usuarioId", u.UsuarioId.ToString());
