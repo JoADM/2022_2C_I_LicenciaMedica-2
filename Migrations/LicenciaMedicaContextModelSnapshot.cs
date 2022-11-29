@@ -52,10 +52,6 @@ namespace LicenciaMedica.Migrations
                     b.Property<int?>("MedicoId")
                         .HasColumnType("int");
 
-                    b.Property<string>("nombreMedico")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("LicenciaId");
 
                     b.HasIndex("EmpleadoId");
@@ -127,8 +123,8 @@ namespace LicenciaMedica.Migrations
 
                     b.Property<string>("NombreUsuario")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("Password")
                         .IsRequired()

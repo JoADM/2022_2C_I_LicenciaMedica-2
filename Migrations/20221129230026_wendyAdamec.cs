@@ -5,11 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LicenciaMedica.Migrations
 {
-<<<<<<<< HEAD:Migrations/20221129031417_migraJoa.cs
-    public partial class migraJoa : Migration
-========
-    public partial class joacoo : Migration
->>>>>>>> 2d15d54c88102e24abe0158de34c56abbcf60ada:Migrations/20221128210222_joacoo.cs
+    public partial class wendyAdamec : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,7 +31,7 @@ namespace LicenciaMedica.Migrations
                 {
                     UsuarioId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NombreUsuario = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    NombreUsuario = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -64,7 +60,6 @@ namespace LicenciaMedica.Migrations
                 {
                     LicenciaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nombreMedico = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FechaSolicitud = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EmpleadoId = table.Column<int>(type: "int", nullable: true),

@@ -13,7 +13,7 @@
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingThree">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Añadir Licencia
+                Solicitar Licencia
             </button>
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
@@ -23,31 +23,35 @@
                     <div class="mb-3">
                         <label asp-for="Descripcion" class="form-label">Descripcion</label>
                         <input asp-for="Descripcion" class="form-control" id="apellidoLogin" placeholder="Descripcion">
+                        <span asp-validation-for="Descripcion" class="text-danger"></span> @*error*@
                     </div>
                     <div class="mb-3">
-                        <label asp-for="FechaInicio" class="form-label">Fecha inicio</label>
+                        <label asp-for="FechaInicio" class="form-label">Fecha inicio <i class="bi bi-arrow-right-circle"></i></label>
                         <input asp-for="FechaInicio" type="date" id="fechaInicio">
+                        <span asp-validation-for="FechaInicio" class="text-danger"></span> @*error*@
                     </div>
                     <div class="mb-3">
                         <label asp-for="FechaFin" class="form-label">Fecha fin</label>
                         <input asp-for="FechaFin" type="date" id="fechaFin">
+                        <span asp-validation-for="FechaFin" class="text-danger"></span> @*error*@
                     </div>
 
                     <label class="form-label">Medico</label>
-                    <select asp-for="nombreMedico" class="form-select">
+                    <select asp-for="MedicoId" class="form-select">
+                        <option disabled selected>Seleccione un médico</option>
                         @{
                             @foreach (var user in ViewBag.usuarios)
                             {
                                 if (user.Rol == "medico")
                                 {
-                                    <option value="@user.Nombre @user.Apellido">@user.Nombre @user.Apellido</option>
+                                    <option value="@user.UsuarioId">@user.Nombre @user.Apellido</option>
                                 }
                             }
                         }
                     </select>
 
                     <div class="modal-footer">
-                        <button type="submit" title="aa" class="btn btn-dark form-control">Añadir</button>
+                        <button type="submit" title="aniadirLicencia" class="btn btn-dark form-control">Solicitar</button>
                     </div>
                 </form>
             </div>

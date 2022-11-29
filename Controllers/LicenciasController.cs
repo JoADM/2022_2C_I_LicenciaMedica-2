@@ -190,7 +190,7 @@ namespace LicenciaMedica.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> aniadirLicencia([Bind("Descripcion,FechaInicio,FechaFin, EmpleadoId, MedicoId, nombreMedico")] Licencia licencia)
+        public async Task<IActionResult> aniadirLicencia([Bind("Descripcion,FechaInicio,FechaFin, EmpleadoId, MedicoId")] Licencia licencia)
         {
 
             if (ModelState.IsValid)
@@ -204,12 +204,9 @@ namespace LicenciaMedica.Controllers
                 lic.MedicoId = licencia.MedicoId;
                 lic.FechaInicio = licencia.FechaInicio;
                 lic.FechaFin = licencia.FechaFin;
-                lic.nombreMedico = licencia.nombreMedico;
                 lic.Activa = true;
 
                 _context.Licencias.Add(lic);
-
-                ViewBag.nombreMedico = from p in _context.Usuarios.Where(x => x.UsuarioId == licencia.MedicoId) select p;
 
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");

@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LicenciaMedica.Migrations
 {
     [DbContext(typeof(LicenciaMedicaContext))]
-<<<<<<<< HEAD:Migrations/20221129031417_migraJoa.Designer.cs
-    [Migration("20221129031417_migraJoa")]
-    partial class migraJoa
-========
-    [Migration("20221128210222_joacoo")]
-    partial class joacoo
->>>>>>>> 2d15d54c88102e24abe0158de34c56abbcf60ada:Migrations/20221128210222_joacoo.Designer.cs
+    [Migration("20221129230026_wendyAdamec")]
+    partial class wendyAdamec
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,10 +53,6 @@ namespace LicenciaMedica.Migrations
 
                     b.Property<int?>("MedicoId")
                         .HasColumnType("int");
-
-                    b.Property<string>("nombreMedico")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("LicenciaId");
 
@@ -134,8 +125,8 @@ namespace LicenciaMedica.Migrations
 
                     b.Property<string>("NombreUsuario")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("Password")
                         .IsRequired()

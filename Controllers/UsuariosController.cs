@@ -1,5 +1,6 @@
 ﻿using _2022_2C_I_LicenciaMedica.Models;
 using LicenciaMedica.Data;
+using LicenciaMedica.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol;
@@ -44,6 +45,8 @@ namespace LicenciaMedica.Controllers
                     nuevoMedico.EMail = usuario.EMail;
                     nuevoMedico.Telefono = usuario.Telefono;
                     nuevoMedico.Rol = usuario.Rol;
+
+                    nuevoMedico.MedicoId = usuario.UsuarioId;
 
                     _context.Usuarios.Add(nuevoMedico);
                 }
@@ -92,6 +95,16 @@ namespace LicenciaMedica.Controllers
 
             HttpContext.Session.SetString("usuario", u.NombreUsuario);
             HttpContext.Session.SetString("rol", u.Rol);
+            if (u.Rol == "medico")
+            {
+                HttpContext.Session.SetString("nameMedico", u.Nombre);
+            }
+
+            if (u.Rol == "empleado")
+            {
+                HttpContext.Session.SetString("nameEmpleado", u.Nombre);
+            }
+
             HttpContext.Session.SetString("usuarioId", u.UsuarioId.ToString());
 
             /*HttpContext.Session.SetString("rol", u.Rol);*/
