@@ -29,15 +29,15 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                                </li>
+                               // <li class="nav-item">
+                               //     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                               // </li>
                             }
 
                             if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("usuario")) && @HttpContextAccessor.HttpContext.Session.GetString("rol").Equals("medico"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Medicos" asp-action="Medicos">Mis visitas</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="Medicos">Mis visitas</a>
                                 </li>
                             }
 
