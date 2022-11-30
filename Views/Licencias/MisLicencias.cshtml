@@ -27,11 +27,11 @@
                 {
                     <div class="card" style="width: 20rem; margin: .25rem;">
                         <div class="card-body">
-                            <h5 class="card-title">Licencia Nº: @Html.DisplayFor(modelItem =>  item.LicenciaId)</h5>
-                            <b class="card-text">Nombre medico: </b>@Html.DisplayFor(modelItem => item.Medico.Nombre)<br>
-                            <b class="card-text">Fecha Inicio: </b> @Html.DisplayFor(modelItem => item.FechaInicio) <br>
-                            <b class="card-text">Fecha Fin: </b> @Html.DisplayFor(modelItem => item.FechaFin) <br>
-                            <b class="card-text">Activo: </b> @Html.DisplayFor(modelItem => item.Activa) <br>
+                            <h5 class="card-title">Licencia Nº: @item.LicenciaId</h5>
+                            <b class="card-text">Nombre medico: </b>@item.Medico.Nombre<br>
+                            <b class="card-text">Fecha Inicio: </b> @item.FechaInicio.ToShortDateString()<br>
+                            <b class="card-text">Fecha Fin: </b> @item.FechaFin.ToShortDateString()<br>
+                            <b class="card-text">Activo: </b> @Html.DisplayFor(modelItem => item.Activa)<br>
                         </div>
                     </div>
                 }

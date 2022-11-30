@@ -75,6 +75,7 @@ namespace LicenciaMedica.Controllers
         }
 
         // GET: Licencias/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Licencias == null)
@@ -90,6 +91,10 @@ namespace LicenciaMedica.Controllers
             ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "UsuarioId", "Apellido", licencia.EmpleadoId);
             ViewData["MedicoId"] = new SelectList(_context.Medicos, "UsuarioId", "Apellido", licencia.MedicoId);
 
+            //licencia.EmpleadoId = (int)ViewData["EmpleadoId"];
+            //licencia.MedicoId= ViewData["MedicoId"].ToString();
+
+
             return View(licencia);
         }
 
@@ -100,6 +105,8 @@ namespace LicenciaMedica.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("LicenciaId,FechaSolicitud,Descripcion,EmpleadoId,MedicoId,FechaInicio,FechaFin,Activa")] Licencia licencia)
         {
+            _ = licencia;
+
             if (id != licencia.LicenciaId)
             {
                 return NotFound();
@@ -123,12 +130,12 @@ namespace LicenciaMedica.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(MisVisitas));
             }
             ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "UsuarioId", "Apellido", licencia.EmpleadoId);
             ViewData["MedicoId"] = new SelectList(_context.Medicos, "UsuarioId", "Apellido", licencia.MedicoId);
-           
-            return View(licencia);
+
+            return View("MisVisitas");
         }
 
         // GET: Licencias/Delete/5
@@ -192,7 +199,7 @@ namespace LicenciaMedica.Controllers
 
         public async Task<IActionResult> aniadirLicencia([Bind("Descripcion,FechaInicio,FechaFin, EmpleadoId, MedicoId")] Licencia licencia)
         {
-           
+
             Licencia lic = new Licencia();
 
             lic.FechaSolicitud = DateTime.Today;
@@ -212,7 +219,7 @@ namespace LicenciaMedica.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction("Index", "Home");
-           
+
 
             return View(licencia);
         }
@@ -228,7 +235,19 @@ namespace LicenciaMedica.Controllers
                 .Where(x => x.EmpleadoId == id)
                 .Include(p => p.Medico)
                 orderby p.FechaSolicitud descending
-              
+
+                select p).ToList();
+            return View(licencias);
+        }
+
+        public IActionResult Licencias()
+        {
+            var licencias = (
+                from p in _context.Licencias
+                .Include(p => p.Empleado)
+                .Include(p => p.Medico)
+                orderby p.FechaSolicitud descending
+
                 select p).ToList();
             return View(licencias);
         }

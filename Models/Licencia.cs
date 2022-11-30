@@ -9,8 +9,8 @@
         public int? EmpleadoId { get; set; }
 
         public int? MedicoId { get; set; }
-        public Empleado Empleado { get; set; }
-        public Medico Medico { get; set; }
+        public Empleado? Empleado { get; set; }
+        public Medico? Medico { get; set; }
 
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
