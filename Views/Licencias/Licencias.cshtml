@@ -31,8 +31,8 @@
                             <b class="card-text">Nombre empleado: </b>@Html.DisplayFor(modelItem => item.Empleado.Nombre)<br>
                             <b class="card-text">Nombre medico: </b>@Html.DisplayFor(modelItem => item.Medico.Nombre)<br>
                             <b class="card-text">Descripcion: </b>@Html.DisplayFor(modelItem => item.Descripcion)<br>
-                            <b class="card-text">Fecha Inicio: </b> @item.FechaInicio.ToShortDateString()) <br>
-                            <b class="card-text">Fecha Fin: </b> @item.FechaFin.ToShortDateString()) <br>
+                            <b class="card-text">Fecha Inicio: </b> @item.FechaInicio.ToShortDateString() <br>
+                            <b class="card-text">Fecha Fin: </b> @item.FechaFin.ToShortDateString() <br>
                             <b class="card-text">Activo: </b> @Html.DisplayFor(modelItem => item.Activa) <br>
                             <br>
                             <a class="btn btn-light form-control" id="enviar" method="post" asp-action="Edit" asp-route-id="@item.LicenciaId"> Editar </a>

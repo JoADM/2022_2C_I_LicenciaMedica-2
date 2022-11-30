@@ -27,7 +27,7 @@
                 {
                     <div class="card" style="width: 20rem; margin: .25rem;">
                         <div class="card-body">
-                            <h5 class="card-title">Licencia ID: @item.LicenciaId</h5
+                            <h5 class="card-title">Licencia ID: @item.LicenciaId</h5>
                             <b class="card-text">Nombre medico: </b>@item.Medico.Nombre<br>
                             <b class="card-text">Descripcion: </b>@item.Descripcion<br>
                             <b class="card-text">Fecha Inicio: </b> @item.FechaInicio.ToShortDateString()<br>
@@ -37,11 +37,11 @@
                     </div>
                 }
             }else
-        {
+            {
             <div margin: auto>
                 <h2>Aquí podrás visualizar tus licencias cuando exista alguna.</h2>
             </div>
-        }
+            }
         }
         <style>
             .card {
