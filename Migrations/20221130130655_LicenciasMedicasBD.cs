@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LicenciaMedica.Migrations
 {
-    public partial class joaco : Migration
+    public partial class LicenciasMedicasBD : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,11 +53,6 @@ namespace LicenciaMedica.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.UsuarioId);
-                    table.ForeignKey(
-                        name: "FK_Usuarios_Prestadoras_PrestadoraId",
-                        column: x => x.PrestadoraId,
-                        principalTable: "Prestadoras",
-                        principalColumn: "PrestadoraId");
                 });
 
             migrationBuilder.CreateTable(
@@ -98,11 +93,6 @@ namespace LicenciaMedica.Migrations
                 name: "IX_Licencias_MedicoId",
                 table: "Licencias",
                 column: "MedicoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Usuarios_PrestadoraId",
-                table: "Usuarios",
-                column: "PrestadoraId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -111,10 +101,10 @@ namespace LicenciaMedica.Migrations
                 name: "Licencias");
 
             migrationBuilder.DropTable(
-                name: "Usuarios");
+                name: "Prestadoras");
 
             migrationBuilder.DropTable(
-                name: "Prestadoras");
+                name: "Usuarios");
         }
     }
 }

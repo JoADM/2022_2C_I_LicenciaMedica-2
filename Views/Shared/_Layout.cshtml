@@ -41,7 +41,9 @@
                                 </li>
                             }
 
-                            if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("usuario")) && @HttpContextAccessor.HttpContext.Session.GetString("rol").Equals("empleado"))
+                            if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("usuario")) && (@HttpContextAccessor.HttpContext.Session.GetString("rol").Equals("rrhh") || @HttpContextAccessor.HttpContext.Session.GetString("rol").Equals("empleado"))
+                                
+)
                             {
 
                                 <li class="nav-item">
