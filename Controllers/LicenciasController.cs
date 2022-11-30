@@ -14,9 +14,11 @@ namespace LicenciaMedica.Controllers
     {
         private readonly LicenciaMedicaContext _context;
 
+
         public LicenciasController(LicenciaMedicaContext context)
         {
             _context = context;
+
         }
 
         // GET: Licencias
@@ -73,6 +75,7 @@ namespace LicenciaMedica.Controllers
         }
 
         // GET: Licencias/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Licencias == null)
@@ -87,6 +90,11 @@ namespace LicenciaMedica.Controllers
             }
             ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "UsuarioId", "Apellido", licencia.EmpleadoId);
             ViewData["MedicoId"] = new SelectList(_context.Medicos, "UsuarioId", "Apellido", licencia.MedicoId);
+
+            //licencia.EmpleadoId = (int)ViewData["EmpleadoId"];
+            //licencia.MedicoId= ViewData["MedicoId"].ToString();
+
+
             return View(licencia);
         }
 
@@ -97,6 +105,8 @@ namespace LicenciaMedica.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("LicenciaId,FechaSolicitud,Descripcion,EmpleadoId,MedicoId,FechaInicio,FechaFin,Activa")] Licencia licencia)
         {
+            _ = licencia;
+
             if (id != licencia.LicenciaId)
             {
                 return NotFound();
@@ -120,11 +130,24 @@ namespace LicenciaMedica.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+                string redirect = "";
+
+                if (HttpContext.Session.GetString("rol") == "medico")
+                {
+                    redirect = "MisVisitas";
+                }
+                if (HttpContext.Session.GetString("rol") == "rrhh")
+                {
+                    redirect = "Licencias";
+                }
+
+                return RedirectToAction(redirect);
             }
             ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "UsuarioId", "Apellido", licencia.EmpleadoId);
             ViewData["MedicoId"] = new SelectList(_context.Medicos, "UsuarioId", "Apellido", licencia.MedicoId);
-            return View(licencia);
+
+            return View("MisVisitas");
         }
 
         // GET: Licencias/Delete/5
@@ -171,27 +194,105 @@ namespace LicenciaMedica.Controllers
             return _context.Licencias.Any(e => e.LicenciaId == id);
         }
 
+        public IActionResult aniadirLicencia()
+        {
+            List<Usuario> usuarios = _context.Usuarios.ToList();
+            ViewBag.usuarios = usuarios;
+
+
+            ViewBag.MiUsuario = HttpContext.Session.GetString("usuarioId");
+
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> aniadirLicencia([Bind("Descripcion,FechaInicio,FechaFin, EmpleadoId, MedicoId")] Licencia licencia)
+        {
+
+            Licencia lic = new Licencia();
+
+            lic.FechaSolicitud = DateTime.Today;
+            lic.Descripcion = licencia.Descripcion;
+            lic.EmpleadoId = licencia.EmpleadoId;
+            lic.FechaInicio = licencia.FechaInicio;
+            lic.FechaFin = licencia.FechaFin;
+            lic.Activa = true;
+
+
+            lic.Empleado = _context.Empleados.FirstOrDefault(e => e.UsuarioId == licencia.EmpleadoId);
+
+            lic.Medico = _context.Medicos.FirstOrDefault(e => e.UsuarioId == licencia.MedicoId);
+
+
+            _context.Licencias.Add(lic);
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Home");
+
+
+            return View(licencia);
+        }
+
+
         public IActionResult MisLicencias()
         {
-            List<Licencia> z = new List<Licencia>();
-            try
+            var id = int.Parse(HttpContext.Session.GetString("usuarioId"));
+
+            var licencias = (
+                from p in _context.Licencias
+                .Include(p => p.Empleado)
+                .Where(x => x.EmpleadoId == id)
+                .Include(p => p.Medico)
+                orderby p.FechaSolicitud descending
+
+                select p).ToList();
+            return View(licencias);
+        }
+
+        public IActionResult Licencias()
+        {
+            var licencias = (
+                from p in _context.Licencias
+                .Include(p => p.Empleado)
+                .Include(p => p.Medico)
+                orderby p.FechaSolicitud descending
+
+                select p).ToList();
+            return View(licencias);
+        }
+
+        public IActionResult MisVisitas()
+        {
+            ViewBag.medicoName = HttpContext.Session.GetString("nameMedico");
+
+
+            var idUsuario = int.Parse(HttpContext.Session.GetString("usuarioId"));
+
+            var medicos = (from p in _context.Medicos select p).ToList();
+
+            var lstLicencia = (from p in _context.Licencias.Where(x => x.MedicoId == idUsuario) select p).ToList();
+
+            List<string> lstNombres = new List<string>();
+
+            for (int i = 0; i < lstLicencia.Count; i++)
             {
-                var id = HttpContext.Session.GetString("EmpleadoId");
-                var uId = int.Parse(id);
-                z = (
-                    from p in _context.Licencias
-                    .Include(p => p.Empleado)
-                    .Where(x => x.EmpleadoId == uId)
-                    orderby p.FechaSolicitud descending
-                    select p).ToList();
+                var miLicencia = lstLicencia[i];
+                var miEmpleado = (Usuario)(from p in _context.Usuarios.Where(x => x.UsuarioId == miLicencia.EmpleadoId) select p).ToList()[0];
+
+                lstNombres.Add(miEmpleado.Nombre);
 
             }
-            catch
-            {
 
-            }
 
-            return View(z);
+            ViewBag.nombresEmpleados = lstNombres;
+            return View(lstLicencia);
+
+
+            //select * from Licencias
+            //where LicenciaId = 1
         }
 
     }

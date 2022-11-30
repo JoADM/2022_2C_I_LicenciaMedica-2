@@ -84,11 +84,12 @@ namespace LicenciaMedica.Controllers
             if (u == null)
             {
                 TempData["mensaje"] = "El usuario o contraseña ingresados son incorrectos";
-                return RedirectToAction("Login");
+                return RedirectToAction("IniciarSesion");
             }
 
             HttpContext.Session.SetString("usuario", u.NombreUsuario);
             HttpContext.Session.SetString("rol", u.Rol);
+            HttpContext.Session.SetString("usuarioId", u.UsuarioId.ToString());
 
 
 

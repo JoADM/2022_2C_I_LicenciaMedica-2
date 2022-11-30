@@ -29,27 +29,41 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                                </li>
+                               // <li class="nav-item">
+                               //     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                               // </li>
                             }
 
                             if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("usuario")) && @HttpContextAccessor.HttpContext.Session.GetString("rol").Equals("medico"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Medicos" asp-action="Medicos">Mis visitas</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="MisVisitas">Mis visitas</a>
                                 </li>
                             }
 
-                            if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("usuario")) && @HttpContextAccessor.HttpContext.Session.GetString("rol").Equals("empleado"))
+                            if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("usuario")) && (@HttpContextAccessor.HttpContext.Session.GetString("rol").Equals("rrhh") || @HttpContextAccessor.HttpContext.Session.GetString("rol").Equals("empleado"))
+                                
+)
                             {
 
                                 <li class="nav-item">
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="MisLicencias">Mis Licencias</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Empleados" asp-action="aniadirLicencia">Añadir Licencia</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="aniadirLicencia">Añadir Licencia</a>
                                 </li>
+                            }
+
+
+                            if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("usuario")) && @HttpContextAccessor.HttpContext.Session.GetString("rol").Equals("rrhh")
+
+                            )
+                            {
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="Licencias">Licencias</a>
+                                </li>
+                                
                             }
                         }
 

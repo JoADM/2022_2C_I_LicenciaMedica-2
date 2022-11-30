@@ -4,6 +4,7 @@ using LicenciaMedica.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LicenciaMedica.Migrations
 {
     [DbContext(typeof(LicenciaMedicaContext))]
-    partial class LicenciaMedicaContextModelSnapshot : ModelSnapshot
+<<<<<<<< HEAD:Migrations/20221127173214_migracionJoa.Designer.cs
+    [Migration("20221127173214_migracionJoa")]
+    partial class migracionJoa
+========
+    [Migration("20221130181017_JoADM")]
+    partial class JoADM
+>>>>>>>> Joaco.Branch.Nuevo.Usar.Este:Migrations/20221130181017_JoADM.Designer.cs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
