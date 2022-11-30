@@ -27,7 +27,7 @@
                 {
                     <div class="card" style="width: 20rem; margin: .25rem;">
                         <div class="card-body">
-                            <h5 class="card-title">Licencia Nº: @Html.DisplayFor(modelItem =>  item.LicenciaId)</h5>
+                            <h5 class="card-title">Licencia ID: @Html.DisplayFor(modelItem =>  item.LicenciaId)</h5>
                             <b class="card-text">Nombre empleado: </b>@Html.DisplayFor(modelItem => item.Empleado.Nombre)<br>
                             <b class="card-text">Nombre medico: </b>@Html.DisplayFor(modelItem => item.Medico.Nombre)<br>
                             <b class="card-text">Descripcion: </b>@Html.DisplayFor(modelItem => item.Descripcion)<br>
@@ -39,6 +39,12 @@
                         </div>
                     </div>
                 }
+            }
+            else
+            {
+                <div margin: auto>
+                    <h2>Aquí podrás visualizar las licencias cuando exista alguna.</h2>
+                </div>
             }
         }
         <style>
