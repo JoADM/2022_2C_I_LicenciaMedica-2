@@ -130,7 +130,19 @@ namespace LicenciaMedica.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(MisVisitas));
+
+                string redirect = "";
+
+                if (HttpContext.Session.GetString("rol") == "medico")
+                {
+                    redirect = "MisVisitas";
+                }
+                if (HttpContext.Session.GetString("rol") == "rrhh")
+                {
+                    redirect = "Licencias";
+                }
+
+                return RedirectToAction(redirect);
             }
             ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "UsuarioId", "Apellido", licencia.EmpleadoId);
             ViewData["MedicoId"] = new SelectList(_context.Medicos, "UsuarioId", "Apellido", licencia.MedicoId);
