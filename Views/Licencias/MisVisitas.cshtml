@@ -26,7 +26,7 @@
                 {
                     <div class="card" style="width: 20rem; margin: .25rem;">
                         <div class="card-body">
-                            <h5 class="card-title">Licencia Nº: @item.LicenciaId</h5>
+                            <h5 class="card-title">Licencia ID: @item.LicenciaId</h5>
                             <b class="card-text">Nombre empleado: </b> @ViewBag.nombresEmpleados[cont] <br>
                             <b class="card-text">Descripcion: </b> @item.Descripcion <br>
                             <b class="card-text">Fecha Inicio: </b> @item.FechaInicio.ToShortDateString() <br>
@@ -43,7 +43,7 @@
             else
             {
                 <div margin: auto>
-                    <h2>Aquí podrás visualizar tus visitas asignadas cuando tengas alguna.</h2>
+                    <h2>Aquí podrás visualizar tus licencias cuando exista alguna.</h2>
                 </div>
             }
 

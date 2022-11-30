@@ -1,4 +1,6 @@
 ﻿@model _2022_2C_I_LicenciaMedica.Models.Licencia
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
 @{
     ViewData["Title"] = "Edit";
@@ -9,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <h1>Edicion de la visita N°: @Html.DisplayFor(model => model.LicenciaId)</h1>
+    <h1>Edicion de la visita con el ID: @Html.DisplayFor(model => model.LicenciaId)</h1>
     <hr />
     <div class="row">
         <div class="col-md-4" id="center">
@@ -57,7 +59,20 @@
     <br>
 
     <div>
-        <button id="atras" type="button" class="btn btn-secondary" onclick="location.href='@Url.Action("MisVisitas", "Licencias")'">Volver a las visitas</button>
+        @{
+            string redirect = "";
+
+            if (@HttpContextAccessor.HttpContext.Session.GetString("rol") == "medico")
+            {
+                redirect = "MisVisitas";
+            }
+            if (@HttpContextAccessor.HttpContext.Session.GetString("rol") == "rrhh")
+            {
+                redirect = "Licencias";
+
+            }
+        }
+        <button id="atras" type="button" class="btn btn-secondary" onclick="location.href='@Url.Action(redirect)'">Volver a la lista</button>
     </div>
 </body>
 
