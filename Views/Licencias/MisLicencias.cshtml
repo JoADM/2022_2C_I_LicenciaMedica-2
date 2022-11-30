@@ -20,10 +20,12 @@
                     @Html.DisplayNameFor(model => model.Empleado.Nombre)
                 </th>
                 <th>
+                   Nombre medico
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Descripcion)
                 </th>
-               
-                
+
                 <th>
                     @Html.DisplayNameFor(model => model.FechaInicio)
                 </th>
@@ -41,6 +43,9 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Empleado.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Medico.Nombre)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Descripcion)

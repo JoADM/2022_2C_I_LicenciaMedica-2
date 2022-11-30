@@ -224,7 +224,9 @@ namespace LicenciaMedica.Controllers
                 from p in _context.Licencias
                 .Include(p => p.Empleado)
                 .Where(x => x.EmpleadoId == id)
+                .Include(p => p.Medico)
                 orderby p.FechaSolicitud descending
+              
                 select p).ToList();
             return View(licencias);
         }
