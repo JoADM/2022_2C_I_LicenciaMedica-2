@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LicenciaMedica.Migrations
 {
-    public partial class wendyAdamec : Migration
+    public partial class joaco : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
