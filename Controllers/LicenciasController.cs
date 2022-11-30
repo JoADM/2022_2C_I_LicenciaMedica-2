@@ -231,7 +231,7 @@ namespace LicenciaMedica.Controllers
             return View(licencias);
         }
 
-        public IActionResult Medicos()
+        public IActionResult MisVisitas()
         {
             ViewBag.medicoName = HttpContext.Session.GetString("nameMedico");
 

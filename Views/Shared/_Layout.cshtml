@@ -37,7 +37,7 @@
                             if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("usuario")) && @HttpContextAccessor.HttpContext.Session.GetString("rol").Equals("medico"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="Medicos">Mis visitas</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="MisVisitas">Mis visitas</a>
                                 </li>
                             }
 
