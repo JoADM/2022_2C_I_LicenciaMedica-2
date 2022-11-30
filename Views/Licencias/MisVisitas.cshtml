@@ -22,20 +22,19 @@
             if (Model.Count() > 0)
             {
                 var cont = 0;
-                @foreach (var l in Model)
+                @foreach (var item in Model)
                 {
                     <div class="card" style="width: 20rem; margin: .25rem;">
                         <div class="card-body">
-                            <h5 class="card-title">Licencia Nº: @l.LicenciaId</h5>
+                            <h5 class="card-title">Licencia Nº: @item.LicenciaId</h5>
                             <b class="card-text">Nombre empleado: </b> @ViewBag.nombresEmpleados[cont] <br>
-                            <b class="card-text">Descripcion: </b> @l.Descripcion <br>
-                            <b class="card-text">Fecha Inicio: </b> @l.FechaInicio.ToShortDateString() <br>
-                            <b class="card-text">Fecha Fin: </b> @l.FechaFin.ToShortDateString() <br>
-                            <b class="card-text">Activo: </b> @Html.DisplayFor(modelItem =>  l.Activa) <br>
+                            <b class="card-text">Descripcion: </b> @item.Descripcion <br>
+                            <b class="card-text">Fecha Inicio: </b> @item.FechaInicio.ToShortDateString() <br>
+                            <b class="card-text">Fecha Fin: </b> @item.FechaFin.ToShortDateString() <br>
+                            <b class="card-text">Activo: </b> @Html.DisplayFor(modelItem =>  item.Activa) <br>
                             <br>
-                            <a class="btn btn-light form-control" id="enviar" method="post" asp-action="Edit" asp-route-id="@l.LicenciaId"> Editar </a>
+                            <a class="btn btn-light form-control" id="enviar" method="post" asp-action="Edit" asp-route-id="@item.LicenciaId"> Editar </a>
                         </div>
-
                     </div>
 
                     cont++;
