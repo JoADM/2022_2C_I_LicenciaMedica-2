@@ -28,9 +28,12 @@
                         <div class="card-body">
                             <h5 class="card-title">Licencia Nº: @Html.DisplayFor(modelItem =>  l.LicenciaId)</h5>
                             <b class="card-text">Nombre empleado: </b> @ViewBag.nombresEmpleados[cont] <br>
+                            <b class="card-text">Descripcion: </b> @l.Descripcion <br>
                             <b class="card-text">Fecha Inicio: </b> @l.FechaInicio.ToShortDateString() <br>
                             <b class="card-text">Fecha Fin: </b> @l.FechaFin.ToShortDateString() <br>
                             <b class="card-text">Activo: </b> @Html.DisplayFor(modelItem =>  l.Activa) <br>
+                            <br>
+                            <a class="btn btn-light form-control" id="enviar" asp-controller="Licencias" asp-action="Edit" asp-route-id="@l.LicenciaId"> Editar </a>
                         </div>
                         
                     </div>

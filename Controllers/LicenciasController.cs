@@ -89,6 +89,7 @@ namespace LicenciaMedica.Controllers
             }
             ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "UsuarioId", "Apellido", licencia.EmpleadoId);
             ViewData["MedicoId"] = new SelectList(_context.Medicos, "UsuarioId", "Apellido", licencia.MedicoId);
+
             return View(licencia);
         }
 
@@ -126,6 +127,7 @@ namespace LicenciaMedica.Controllers
             }
             ViewData["EmpleadoId"] = new SelectList(_context.Empleados, "UsuarioId", "Apellido", licencia.EmpleadoId);
             ViewData["MedicoId"] = new SelectList(_context.Medicos, "UsuarioId", "Apellido", licencia.MedicoId);
+           
             return View(licencia);
         }
 
