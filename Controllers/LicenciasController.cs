@@ -233,6 +233,18 @@ namespace LicenciaMedica.Controllers
             return View(licencias);
         }
 
+        public IActionResult Licencias()
+        {
+            var licencias = (
+                from p in _context.Licencias
+                .Include(p => p.Empleado)
+                .Include(p => p.Medico)
+                orderby p.FechaSolicitud descending
+
+                select p).ToList();
+            return View(licencias);
+        }
+
         public IActionResult MisVisitas()
         {
             ViewBag.medicoName = HttpContext.Session.GetString("nameMedico");

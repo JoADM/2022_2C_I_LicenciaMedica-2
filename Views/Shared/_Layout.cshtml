@@ -53,6 +53,18 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="aniadirLicencia">Añadir Licencia</a>
                                 </li>
                             }
+
+
+                            if (!String.IsNullOrEmpty(@HttpContextAccessor.HttpContext.Session.GetString("usuario")) && @HttpContextAccessor.HttpContext.Session.GetString("rol").Equals("rrhh")
+
+                            )
+                            {
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Licencias" asp-action="Licencias">Licencias</a>
+                                </li>
+                                
+                            }
                         }
 
                         
